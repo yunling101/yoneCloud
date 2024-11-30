@@ -1,0 +1,519 @@
+{
+    "dashboard": {
+        "annotations": {
+            "list": [
+                {
+                    "$$hashKey": "object:9146",
+                    "builtIn": 1,
+                    "datasource": {
+                        "type": "datasource",
+                        "uid": "grafana"
+                    },
+                    "enable": true,
+                    "hide": true,
+                    "iconColor": "rgba(0, 211, 255, 1)",
+                    "name": "Annotations & Alerts",
+                    "target": {
+                        "limit": 100,
+                        "matchAny": false,
+                        "tags": [],
+                        "type": "dashboard"
+                    },
+                    "type": "dashboard"
+                }
+            ]
+        },
+        "id": null,
+        "links": [],
+        "liveNow": false,
+        "panels": [
+            {
+                "columns": [],
+                "datasource": "Prometheus",
+                "description": "",
+                "fontSize": "100%",
+                "gridPos": {
+                    "h": 16,
+                    "w": 24,
+                    "x": 0,
+                    "y": 0
+                },
+                "id": 185,
+                "showHeader": true,
+                "sort": {
+                    "col": 20,
+                    "desc": true
+                },
+                "styles": [
+                    {
+                        "$$hashKey": "object:265",
+                        "alias": "\u4e3b\u673a\u540d",
+                        "align": "auto",
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "nodename",
+                        "thresholds": [],
+                        "type": "string",
+                        "unit": "short"
+                    },
+                    {
+                        "$$hashKey": "object:288",
+                        "alias": "IP\u5730\u5740",
+                        "align": "auto",
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "instance",
+                        "thresholds": [],
+                        "type": "number",
+                        "unit": "short"
+                    },
+                    {
+                        "$$hashKey": "object:299",
+                        "alias": "\u5185\u5b58",
+                        "align": "auto",
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "Value #B",
+                        "thresholds": [],
+                        "type": "number",
+                        "unit": "bytes"
+                    },
+                    {
+                        "$$hashKey": "object:310",
+                        "alias": "CPU(\u6838)",
+                        "align": "auto",
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "mappingType": 1,
+                        "pattern": "Value #C",
+                        "thresholds": [],
+                        "type": "number",
+                        "unit": "short"
+                    },
+                    {
+                        "$$hashKey": "object:321",
+                        "alias": "\u542f\u52a8\u65f6\u95f4",
+                        "align": "auto",
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "Value #D",
+                        "thresholds": [],
+                        "type": "number",
+                        "unit": "s"
+                    },
+                    {
+                        "$$hashKey": "object:332",
+                        "alias": " \u78c1\u76d8\u4f7f\u7528(%)",
+                        "align": "auto",
+                        "colorMode": "cell",
+                        "colors": [
+                            "rgba(50, 172, 45, 0.97)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(245, 54, 54, 0.9)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "Value #E",
+                        "thresholds": [
+                            "70",
+                            "85"
+                        ],
+                        "type": "number",
+                        "unit": "percent"
+                    },
+                    {
+                        "$$hashKey": "object:343",
+                        "alias": "CPU\u4f7f\u7528(%)",
+                        "align": "auto",
+                        "colorMode": "cell",
+                        "colors": [
+                            "rgba(50, 172, 45, 0.97)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(245, 54, 54, 0.9)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "Value #F",
+                        "thresholds": [
+                            "70",
+                            "85"
+                        ],
+                        "type": "number",
+                        "unit": "percent"
+                    },
+                    {
+                        "$$hashKey": "object:451",
+                        "alias": "\u5185\u5b58\u4f7f\u7528(%)",
+                        "align": "auto",
+                        "colorMode": "cell",
+                        "colors": [
+                            "rgba(50, 172, 45, 0.97)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(245, 54, 54, 0.9)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "Value #G",
+                        "thresholds": [
+                            "70",
+                            "85"
+                        ],
+                        "type": "number",
+                        "unit": "percent"
+                    },
+                    {
+                        "$$hashKey": "object:462",
+                        "alias": "\u78c1\u76d8\u8bfb\u53d6",
+                        "align": "auto",
+                        "colorMode": "cell",
+                        "colors": [
+                            "rgba(50, 172, 45, 0.97)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(245, 54, 54, 0.9)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "Value #H",
+                        "thresholds": [
+                            "10485760",
+                            "20485760"
+                        ],
+                        "type": "number",
+                        "unit": "Bps"
+                    },
+                    {
+                        "$$hashKey": "object:473",
+                        "alias": "\u78c1\u76d8\u5199\u5165",
+                        "align": "auto",
+                        "colorMode": "cell",
+                        "colors": [
+                            "rgba(50, 172, 45, 0.97)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(245, 54, 54, 0.9)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "Value #I",
+                        "thresholds": [
+                            "10485760",
+                            "20485760"
+                        ],
+                        "type": "number",
+                        "unit": "Bps"
+                    },
+                    {
+                        "$$hashKey": "object:484",
+                        "alias": "\u51fa\u53e3\u901f\u7387",
+                        "align": "auto",
+                        "colorMode": "cell",
+                        "colors": [
+                            "rgba(50, 172, 45, 0.97)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(245, 54, 54, 0.9)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "Value #J",
+                        "thresholds": [
+                            "30485760",
+                            "104857600"
+                        ],
+                        "type": "number",
+                        "unit": "bps"
+                    },
+                    {
+                        "$$hashKey": "object:495",
+                        "alias": "\u5165\u53e3\u901f\u7387",
+                        "align": "auto",
+                        "colorMode": "cell",
+                        "colors": [
+                            "rgba(50, 172, 45, 0.97)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(245, 54, 54, 0.9)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "Value #K",
+                        "thresholds": [
+                            "30485760",
+                            "104857600"
+                        ],
+                        "type": "number",
+                        "unit": "bps"
+                    },
+                    {
+                        "$$hashKey": "object:506",
+                        "alias": "\u8d1f\u8f7d(5m)",
+                        "align": "auto",
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "Value #L",
+                        "thresholds": [],
+                        "type": "number",
+                        "unit": "short"
+                    },
+                    {
+                        "$$hashKey": "object:517",
+                        "alias": "",
+                        "align": "auto",
+                        "colors": [
+                            "rgba(245, 54, 54, 0.9)",
+                            "rgba(237, 129, 40, 0.89)",
+                            "rgba(50, 172, 45, 0.97)"
+                        ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "mappingType": 1,
+                        "pattern": "/.*/",
+                        "thresholds": [],
+                        "type": "hidden",
+                        "unit": "short"
+                    }
+                ],
+                "targets": [
+                    {
+                        "expr": "node_uname_info{job=~\"$job\"} - 0",
+                        "format": "table",
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "\u4e3b\u673a\u540d",
+                        "refId": "A"
+                    },
+                    {
+                        "expr": "sum(time() - node_boot_time_seconds{job=~\"$job\"})by(instance)",
+                        "format": "table",
+                        "hide": false,
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "\u8fd0\u884c\u65f6\u95f4",
+                        "refId": "D"
+                    },
+                    {
+                        "expr": "node_memory_MemTotal_bytes{job=~\"$job\"} - 0",
+                        "format": "table",
+                        "hide": false,
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "\u603b\u5185\u5b58",
+                        "refId": "B"
+                    },
+                    {
+                        "expr": "count(node_cpu_seconds_total{job=~\"$job\",mode='system'}) by (instance)",
+                        "format": "table",
+                        "hide": false,
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "\u603b\u6838\u6570",
+                        "refId": "C"
+                    },
+                    {
+                        "expr": "node_load5{job=~\"$job\"}",
+                        "format": "table",
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "5\u5206\u949f\u8d1f\u8f7d",
+                        "refId": "L"
+                    },
+                    {
+                        "expr": "(1 - avg(irate(node_cpu_seconds_total{job=~\"$job\",mode=\"idle\"}[5m])) by (instance)) * 100",
+                        "format": "table",
+                        "hide": false,
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "CPU\u4f7f\u7528\u7387",
+                        "refId": "F"
+                    },
+                    {
+                        "expr": "(1 - (node_memory_MemAvailable_bytes{job=~\"$job\"} / (node_memory_MemTotal_bytes{job=~\"$job\"})))* 100",
+                        "format": "table",
+                        "hide": false,
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "\u5185\u5b58\u4f7f\u7528\u7387",
+                        "refId": "G"
+                    },
+                    {
+                        "expr": "max((node_filesystem_size_bytes{job=~\"$job\",fstype=~\"ext.?|xfs\"}-node_filesystem_free_bytes{job=~\"$job\",fstype=~\"ext.?|xfs\"}) *100/(node_filesystem_avail_bytes {job=~\"$job\",fstype=~\"ext.?|xfs\"}+(node_filesystem_size_bytes{job=~\"$job\",fstype=~\"ext.?|xfs\"}-node_filesystem_free_bytes{job=~\"$job\",fstype=~\"ext.?|xfs\"})))by(instance)",
+                        "format": "table",
+                        "hide": false,
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "\u5206\u533a\u4f7f\u7528\u7387",
+                        "refId": "E"
+                    },
+                    {
+                        "expr": "max(irate(node_disk_read_bytes_total{job=~\"$job\"}[5m])) by (instance)",
+                        "format": "table",
+                        "hide": false,
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "\u6700\u5927\u8bfb\u53d6",
+                        "refId": "H"
+                    },
+                    {
+                        "expr": "max(irate(node_disk_written_bytes_total{job=~\"$job\"}[5m])) by (instance)",
+                        "format": "table",
+                        "hide": false,
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "\u6700\u5927\u5199\u5165",
+                        "refId": "I"
+                    },
+                    {
+                        "expr": "max(irate(node_network_receive_bytes_total{job=~\"$job\"}[5m])*8) by (instance)",
+                        "format": "table",
+                        "hide": false,
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "\u4e0b\u8f7d\u5e26\u5bbd",
+                        "refId": "J"
+                    },
+                    {
+                        "expr": "max(irate(node_network_transmit_bytes_total{job=~\"$job\"}[5m])*8) by (instance)",
+                        "format": "table",
+                        "hide": false,
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "\u4e0a\u4f20\u5e26\u5bbd",
+                        "refId": "K"
+                    }
+                ],
+                "title": "\u670d\u52a1\u5668\u8d44\u6e90\u6982\u8ff0\uff08\u6bcf\u987510\u884c\uff09",
+                "transform": "table",
+                "type": "table-old"
+            }
+        ],
+        "refresh": false,
+        "schemaVersion": 36,
+        "style": "dark",
+        "tags": [
+            "node"
+        ],
+        "templating": {
+            "list": [
+                {
+                    "current": {
+                        "selected": false,
+                        "text": "All",
+                        "value": "$__all"
+                    },
+                    "datasource": "Prometheus",
+                    "definition": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
+                    "hide": 0,
+                    "includeAll": true,
+                    "label": "\u4e3b\u673a\u540d",
+                    "multi": false,
+                    "name": "hostname",
+                    "options": [],
+                    "query": {
+                        "query": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
+                        "refId": "Prometheus-hostname-Variable-Query"
+                    },
+                    "refresh": 1,
+                    "regex": "",
+                    "skipUrlSync": false,
+                    "sort": 5,
+                    "tagValuesQuery": "",
+                    "tagsQuery": "",
+                    "type": "query",
+                    "useTags": false
+                },
+                {
+                    "allFormat": "glob",
+                    "datasource": "Prometheus",
+                    "definition": "label_values(node_uname_info{job=~\"$job\",nodename=~\"$hostname\"},instance)",
+                    "hide": 0,
+                    "includeAll": false,
+                    "label": "IP\u5730\u5740",
+                    "multi": true,
+                    "multiFormat": "regex values",
+                    "name": "node",
+                    "options": [],
+                    "query": {
+                        "query": "label_values(node_uname_info{job=~\"$job\",nodename=~\"$hostname\"},instance)",
+                        "refId": "Prometheus-node-Variable-Query"
+                    },
+                    "refresh": 1,
+                    "regex": "",
+                    "skipUrlSync": false,
+                    "sort": 5,
+                    "tagValuesQuery": "",
+                    "tagsQuery": "",
+                    "type": "query",
+                    "useTags": false
+                }
+            ]
+        },
+        "time": {
+            "from": "now-6h",
+            "to": "now"
+        },
+        "timepicker": {
+            "hidden": false,
+            "now": true,
+            "refresh_intervals": [
+                "15s",
+                "30s",
+                "1m",
+                "5m",
+                "15m",
+                "30m"
+            ],
+            "time_options": [
+                "5m",
+                "15m",
+                "1h",
+                "6h",
+                "12h",
+                "24h",
+                "2d",
+                "7d",
+                "30d"
+            ]
+        },
+        "title": "\u4e3b\u673a\u8d44\u6e90\u6982\u8ff0",
+        "uid": "0000000003",
+        "version": 1
+    }
+}

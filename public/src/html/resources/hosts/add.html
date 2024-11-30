@@ -1,0 +1,102 @@
+<div class="content">
+    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="/resources/hosts/add/">
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">公网IP:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" class="form-control" name="ip" placeholder="公网IP" data-rule="required;ip"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">内网IP:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" class="form-control" name="intranet" placeholder="内网IP"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">主机名:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" class="form-control" name="hostname" placeholder="主机名" data-rule="required"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">所属业务:</label>
+            <div class="col-xs-12 col-sm-8">
+                <select class="form-control" name="business" id="business_used" data-rule="required">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">提供商:</label>
+            <div class="col-xs-12 col-sm-8">
+                <select class="form-control" name="provider" id="provider" data-rule="required">
+                    <!-- <option value="腾讯云">腾讯云</option>
+                    <option value="阿里云">阿里云</option>
+                    <option value="私有云">私有云</option>
+                    <option value="物理机">物理机</option>
+                    <option value="其他">其他</option> -->
+                </select>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">健康检查:</label>
+            <div class="col-xs-12 col-sm-8">
+                <select class="form-control" name="status" id="status">
+                    <option value="0">禁用</option>
+                    <option value="1">开启</option>
+                </select>
+            </div>
+        </div> -->
+        <!-- <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">代理状态:</label>
+            <div class="col-xs-12 col-sm-8">
+                <select class="form-control" name="proxy" id="proxy">
+                    <option value="0">禁用</option>
+                    <option value="1">开启</option>
+                </select>
+            </div>
+        </div> -->
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">绑定域名:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" class="form-control" name="domain" placeholder="绑定域名"/>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">主机别名:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" class="form-control" name="alias" placeholder="主机别名"/>
+            </div>
+        </div> -->
+<!--        <div class="form-group">-->
+<!--            <label class="control-label col-xs-12 col-sm-2">关联凭证:</label>-->
+<!--            <div class="col-xs-12 col-sm-8">-->
+<!--                <select class="form-control selectpicker" data-live-search="true" multiple name="certificate">-->
+<!--                    %s-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">关联凭证:</label>
+            <div class="col-xs-12 col-sm-8">
+                <span class="text-warning" style="font-size: 12px;">暂仅支持一个主机绑定一个凭证。</span>
+                <select class="form-control" name="certificate" data-rule="required">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">备注信息:</label>
+            <div class="col-xs-12 col-sm-8">
+                <textarea class="form-control" name="comment" rows="3" id="comment" placeholder="备注信息"></textarea>
+            </div>
+        </div>
+
+        <input type="text" class="form-control hide" name="id"/>
+        <div class="form-group layer-footer">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-12 col-sm-8">
+                <button type="submit" class="btn btn-success btn-embossed">确认</button>
+                <button type="reset" class="btn btn-default btn-embossed">重置</button>
+            </div>
+        </div>
+    </form>
+</div>

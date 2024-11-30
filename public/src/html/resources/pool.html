@@ -1,0 +1,39 @@
+<div class="alert alert-info" style="margin-bottom: 10px;">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    开启监控前需要在被监控主机上安装 <a href="https://github.com/prometheus/node_exporter/releases">
+        <strong>node_exporter</strong></a> 并指定默认端口为
+    <strong>17000</strong>。
+</div>
+<div class="alert alert-warning alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    <strong>温馨提示: </strong> 主机池导入需要特定的文件格式，请下载 <a href="/public/static/storage/hosts_import.xlsx"> 模板文件</a> 按照模板格式填写在导入。
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div id="toolbar" class="toolbar">
+                    <a href="javascript:;" class="btn btn-primary btn-refresh" title="刷新"><i
+                            class="fa fa-refresh"></i></a>
+                    <a href="javascript:;" class="btn btn-success btn-add" title="添加主机"><i class="fa fa-plus"></i>
+                        添加主机</a>
+                    <a href="javascript:;" class="btn btn-danger btn-disabled disabled btn-del"><i
+                            class="fa fa-times"></i> 批量删除</a>
+                    <a href="javascript:;" class="btn btn-info btn-import" title="批量导入"
+                        data-url="/resources/hosts/upload/"><i class="fa fa-upload"></i> 批量导入</a>
+                    <a href="/asset/export/" class="btn btn-default btn-export" title="资产导出" data-url=""><i
+                            class="fa fa-download"></i> 资产导出</a>
+                    <!--                    <div class="dropdown btn-group" style="margin-left:6px;">-->
+                    <!--                        <a class="btn btn-primary btn-more dropdown-toggle btn-disabled disabled" data-toggle="dropdown"><i class="fa fa-cog"></i> 更多</a>-->
+                    <!--                        <ul class="dropdown-menu text-left" role="menu">-->
+                    <!--                            <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=normal"><i class="fa fa-eye"></i> 正常</a></li>-->
+                    <!--                            <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=hidden"><i class="fa fa-eye-slash"></i> 硬菜</a></li>-->
+                    <!--                        </ul>-->
+                    <!--                    </div>-->
+                    <input class="hide" type="file" id="toolbar-upload" />
+                </div>
+                <table id="table" class="table table-bordered table-hover" width="100%"></table>
+            </div>
+        </div>
+    </div>
+</div>

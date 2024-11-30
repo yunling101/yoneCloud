@@ -1,0 +1,32 @@
+<div role="tabpanel" class="tab-pane<% if (name == 'mail') { %> active in <% } %>" id="<%= name%>">
+    <div class="panel-body">
+        <form id="<%= name%>-form" role="form" data-toggle="validator" method="POST" action="alarm/template/" novalidate="novalidate">
+            <table class="table table-striped">
+                <tbody>
+                <% config.forEach(function(r){ %>
+                   <tr>
+                       <td><%= r.cname %></td>
+                       <td>
+                           <div class="row">
+                               <div class="col-sm-12 col-xs-12">
+                                   <textarea name="<%= r.ename %>" class="form-control" rows="18"><%= r.value %></textarea>
+                               </div>
+                               <div class="col-sm-4"></div>
+                           </div>
+                       </td>
+                   </tr>
+                <% }); %>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input type="text" name="id" value="<%= name %>" class="hide"></td>
+                        <td>
+                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div role="tabpanel" class="tab-pane<% if (name == 'email') { %> active in <% } %>" id="<%= name%>">
+    <div class="panel-body">
+        <form id="<%= name%>-form" role="globalForm" data-toggle="validator" method="POST" action="alarm/global/config/"
+            novalidate="novalidate">
+            <table class="table table-striped">
+                <tbody>
+                    <% config.forEach(function(r){ %>
+                        <tr>
+                            <td>
+                                <%= r.cname %>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-8 col-xs-12">
+                                        <% if (r.ename=="enabled" || r.ename=="template" ) {%>
+                                            <select name="<%= r.ename %>" class="form-control">
+                                                <option value="0">关闭</option>
+                                                <% if (r.value=="1" ) {%>
+                                                    <option value="1" selected="selected">开启</option>
+                                                    <% }else{ %>
+                                                        <option value="1">开启</option>
+                                                        <% }; %>
+                                            </select>
+                                            <% }else{ %>
+                                                <input type="text" name="<%= r.ename %>" value="<%= r.value %>"
+                                                    class="form-control" data-tip="请填写<%= r.cname %>">
+                                                <% }; %>
+                                    </div>
+                                    <div class="col-sm-4"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td style="padding: 0;padding-top: 20px;">
+                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                        </td>
+                        <td><input type="text" name="id" value="<%= name %>" class="form-control hide"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>

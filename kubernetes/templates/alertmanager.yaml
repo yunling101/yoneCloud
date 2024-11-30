@@ -1,0 +1,169 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager-config
+  namespace: yonecloud
+  labels:
+    app: alertmanager
+data:
+  alertmanager.yml: |-
+    global:
+      resolve_timeout: 5m
+    templates:
+      - /opt/alertmanager/template/*.tmpl
+    route:
+      group_by: ['alertname']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 2h
+      receiver: 'default'
+    receivers:
+      - name: 'default'
+        webhook_configs:
+          - url: 'http://127.0.0.1:5001/'
+    inhibit_rules:
+      - source_match:
+          severity: 'critical'
+        target_match:
+          severity: 'warning'
+        equal: ['alertname', 'dev', 'instance']
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yone-alertmanager-svc
+  namespace: yonecloud
+  labels:
+    app: alertmanager
+spec:
+  type: ClusterIP
+  ports:
+    - name: alertmanager
+      port: 9093
+    - name: alertmanager-plug
+      port: 9098
+  selector:
+    app: alertmanager
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yone-alertmanager
+  namespace: yonecloud
+  labels:
+    app: alertmanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alertmanager
+  template:
+    metadata:
+      labels:
+        app: alertmanager
+    spec:
+      serviceAccountName: config-reloader-sa
+      initContainers:
+        - name: copy-config
+          image: yunling101/alertmanager:${ALERTMANAGER_VERSION}
+          command: ["sh", "-c", "cp -f /opt/alertmanager/config-file/alertmanager.yml /opt/alertmanager/config"]
+          volumeMounts:
+            - name: config-file
+              mountPath: /opt/alertmanager/config-file
+            - name: config
+              mountPath: /opt/alertmanager/config
+      containers:
+        - name: alertmanager
+          image: yunling101/alertmanager:${ALERTMANAGER_VERSION}
+          ports:
+            - containerPort: 9093
+          readinessProbe:
+            initialDelaySeconds: 5
+            tcpSocket:
+              port: 9093
+            periodSeconds: 10
+            timeoutSeconds: 3
+          volumeMounts:
+            - name: data
+              mountPath: /opt/alertmanager/data
+            - name: config
+              mountPath: /opt/alertmanager/config
+              readOnly: true
+            - name: template
+              mountPath: /opt/alertmanager/template
+        - name: alertmanager-plug
+          image: yunling101/alertmanager-plug:${BASE_VERSION}
+          args:
+            - "--alertmanager-base-dir=/opt/alertmanager/config"
+            - "--alertmanager-listen-address=http://localhost:9093"
+            - "--alertmanager-reload=true"
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: yone-secret-key
+                  key: SECRET_KEY
+          ports:
+            - containerPort: 9098
+          readinessProbe:
+            initialDelaySeconds: 5
+            tcpSocket:
+              port: 9098
+            periodSeconds: 10
+            timeoutSeconds: 3
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+          volumeMounts:
+            - name: config
+              mountPath: /opt/alertmanager/config
+              readOnly: false
+        - name: config-reloader
+          image: yunling101/config-reloader:${BASE_VERSION}
+          args:
+            - "--namespace=yonecloud"
+            - "--file-to-configmap=/opt/alertmanager/config/alertmanager.yml:alertmanager-config"
+          volumeMounts:
+            - name: config
+              mountPath: /opt/alertmanager/config
+      volumes:
+        - name: data
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: alertmanager-k8s-data
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 1Gi
+                volumeMode: Filesystem
+        - name: config
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: alertmanager-k8s-config
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 100Mi
+        - name: template
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: alertmanager-k8s-template
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 1Mi
+        - name: config-file
+          configMap:
+            name: alertmanager-config

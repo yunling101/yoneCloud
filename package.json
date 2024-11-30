@@ -1,0 +1,27 @@
+{
+  "name": "yonecloud",
+  "version": "0.1.0",
+  "description": "yone cloud",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yunling101",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-concat-dir": "^1.0.0",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-html-compile": "^1.0.5",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-livereload": "^4.0.2",
+    "gulp-load-plugins": "^2.0.3",
+    "gulp-order": "^1.2.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-clean": "^0.4.0"
+  }
+}

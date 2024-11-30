@@ -1,0 +1,51 @@
+<div class="alert alert-danger alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    <strong>
+        <h3>风险提示: </h3>
+    </strong> 批量命令将以主机绑定的凭证用户执行命令并记录执行日志，请谨慎使用命令！
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>主机列表</h5>
+            </div>
+            <div class="ibox-content">
+                <span class="text-muted" style="margin-left:8px;">
+                    <input type="checkbox" id="checkall">
+                    <label for="checkall"><small>选择全部</small></label>
+                </span>
+                <span class="text-muted">
+                    <input type="checkbox" id="expandall">
+                    <label for="expandall"><small>展开所有</small></label>
+                </span>
+                <div id="assetTree" class="ztree"></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Console</h5>
+            </div>
+            <div class="ibox-content" style="padding: 0;">
+                <div id="tabContent" style="height: 585px;background: #868383;"></div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <textarea class="form-control" name="command" placeholder="请输入要批量执行的命令" rows="4"></textarea>
+                    </div>
+                    <div class="col-lg-6">
+                        <div style="margin-top: 10px;margin-bottom: 20px;">
+                            <!-- <select class="form-control" name="ssh_user" id="ssh_user"></select> -->
+                        </div>
+                        <button class="btn btn-primary" name="submit">执行</button>
+                        <button class="btn btn-default" name="clear">清屏</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div role="tabpanel" class="tab-pane<% if (name == 'email_configs') { %> active in <% } %>" id="<%= name %>">
+    <div class="panel-body">
+        <div class="form-group row">
+            <div class="col-sm-8">
+                <div id="configs_<%= name %>">
+                    <!-- <% config.forEach(function(r){ %>
+                        <% Object.keys(r).forEach(function(i){ %>
+                            <% if (i=="send_resolved" ) {%>
+                                <label class="col-form-label">
+                                    <%= i %>
+                                </label>
+                                <select name="<%= i %>" class="form-control form-control-lg m-b">
+                                    <option value="0">关闭</option>
+                                    <% if (r[i]=="1" ) {%>
+                                        <option value="1" selected="selected">开启</option>
+                                        <% }else{ %>
+                                            <option value="1">开启</option>
+                                            <% }; %>
+                                </select>
+                                <% }else{ %>
+                                    <label class="col-form-label">
+                                        <%= i %>
+                                    </label>
+                                    <input type="text" name="<%= i %>" value="<%= r[i] %>"
+                                        class=" form-control form-control-lg m-b">
+                                    <% }; %>
+                                        <% }); %>
+                                            <% }); %>
+                                                <a>删除</a> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-4">
+                <button class="btn btn-primary btn-embossed" id="subSubmit" name="<%= name %>"
+                    index="<%= index %>">保存</button>
+                <button class="btn btn-white btn-embossed" id="subClick" name="<%= name %>">添加</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonAnnotations:
+  app.kubernetes.io/name: yone
+
+resources:
+  - base/namespace.yaml
+  - base/serviceaccount.yaml
+  - base/secret.yaml
+  - base/mysql.yaml
+  - base/redis.yaml
+  - base/consul.yaml
+  - base/ctrmanager.yaml
+  - base/alertmanager.yaml
+  - base/grafana.yaml
+  - base/prometheus.yaml
+  - base/yonecloud.yaml

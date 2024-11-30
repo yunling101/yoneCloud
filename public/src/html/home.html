@@ -1,0 +1,146 @@
+<div class="alert alert-info alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    <strong>
+        <h4>今日，</h4>
+    </strong> <span id="wlc-info"></span>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <!-- float-right -->
+                <span class="label label-success">用户</span>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins" id="indexUser"></h1>
+                <small>All User</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <span class="label label-info">主机</span>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins" id="indexHosts"></h1>
+                <small>All Hosts</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <span class="label label-primary">业务</span>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="no-margins" id="indexBusiness"></h1>
+                        <div class="font-bold text-navy">0.00% <i class="fa fa-level-up"></i>
+                            <small>业务</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="no-margins" id="indexCluster"></h1>
+                        <div class="font-bold text-navy">0.00% <i class="fa fa-level-up"></i>
+                            <small>其他</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>版本信息</h5>
+            </div>
+            <div class="ibox-content no-padding" style="min-height: 87px;">
+                <table class="table table-hover" width="100%">
+                    <tbody>
+                        <tr>
+                            <td>版本类型:</td>
+                            <td id="auth_type"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>当前版本:</td>
+                            <td id="auth_version"></td>
+                            <td><a href="javascript:;" id="check-update">检查更新</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="ibox ">
+            <div class="ibox-content">
+                <div>
+                    <h4 class="font-bold no-margins">近7日资源增长</h4>
+                </div>
+                <div class="m-t-sm">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div>
+                                <canvas id="lineChart" height="114"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="stat-list m-t-lg">
+                                <li>
+                                    <h2 class="no-margins" id="weekHosts"></h2>
+                                    <small>主机7日总数</small>
+                                    <div class="progress progress-mini">
+                                        <div class="progress-bar" id="weekHostsBar"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="no-margins" id="weekBusiness"></h2>
+                                    <small>业务7日总数</small>
+                                    <div class="progress progress-mini">
+                                        <div class="progress-bar" id="weekBusinessBar"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-t-md">
+                    <small class="float-right">
+                        <i class="fa fa-clock-o"></i>
+                        <span id="weekDate"></span>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>最近登录记录</h5>
+            </div>
+            <div class="ibox-content no-padding">
+                <ul class="list-group" id="loginRecord">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>最近操作记录</h5>
+                <span class="label label-info">时间线</span>
+            </div>
+            <div class="ibox-content inspinia-timeline" id="optionRecord"></div>
+        </div>
+    </div>
+</div>

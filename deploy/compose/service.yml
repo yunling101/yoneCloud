@@ -1,0 +1,207 @@
+name: ${NAME}
+
+services:
+  yonecloud:
+    image: yunling101/yonecloud:${BASE_VERSION}
+    container_name: ${NAME}_yonecloud
+    restart: always
+    volumes:
+      - ${DEPLOY_DIR}/yonecloud/config:/yoneCloud/webserver/config
+      - ${DEPLOY_DIR}/yonecloud/media:/yoneCloud/webserver/media
+    environment:
+      GRAFANA_URL: http://${GRAFANA_HOST}:3000
+      DATA_SOURCE_URL: http://${PROMETHEUS_HOST}:9090
+    healthcheck:
+      test: "curl -fs http://127.0.0.1:8010/ > /dev/null"
+      interval: 30s
+      retries: 3
+      start_period: 5s
+    ports:
+      - 0.0.0.0:8080:8080
+    expose:
+      - 8080
+    networks:
+      - net
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  ctrmanager:
+    image: yunling101/ctrmanager:${BASE_VERSION}
+    container_name: ${NAME}_ctrmanager
+    restart: always
+    volumes:
+      - type: bind
+        source: ../ctrmanager/config.yml
+        target: /opt/conf/config.yml
+        read_only: true
+    ports:
+      - 0.0.0.0:9096:9096
+    expose:
+      - 9096
+    networks:
+      - net
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  grafana:
+    image: grafana/grafana:${GRAFANA_VERSION}
+    user: "0"
+    container_name: ${NAME}_grafana
+    restart: always
+    volumes:
+      - type: bind
+        source: ../grafana/grafana.ini
+        target: /etc/grafana/grafana.ini
+        read_only: true
+      - ${DEPLOY_DIR}/grafana/data:/var/lib/grafana
+      - ${DEPLOY_DIR}/grafana/log:/var/log/grafana
+      - ${DEPLOY_DIR}/grafana/plugins:/var/lib/grafana/plugins
+    ports:
+      - 0.0.0.0:3000:3000
+    expose:
+      - 3000
+    networks:
+      - net
+    depends_on:
+      - prometheus
+
+  alertmanager-plug:
+    image: yunling101/alertmanager-plug:${BASE_VERSION}
+    container_name: ${NAME}_alertmanager_plug
+    user: "0"
+    restart: always
+    volumes:
+      - ${DEPLOY_DIR}/alertmanager/config:/opt/alertmanager
+      - ${DEPLOY_DIR}/alertmanager/template:/opt/alertmanager/template
+    command:
+      - "--alertmanager-base-dir=/opt/alertmanager"
+      - "--alertmanager-listen-address=http://${NAME}_alertmanager:9093"
+      - "--alertmanager-reload=true"
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+    expose:
+      - 9098
+    networks:
+      - net
+    depends_on:
+      - alertmanager
+
+  prometheus-plug:
+    image: yunling101/prometheus-plug:${BASE_VERSION}
+    container_name: ${NAME}_prometheus_plug
+    user: "0"
+    restart: always
+    volumes:
+      - ${DEPLOY_DIR}/prometheus/rules:/opt/rules
+    command:
+      - "--prometheus-rules-store-dir=/opt/rules"
+      - "--prometheus-listen-address=http://${NAME}_prometheus:9090"
+      - "--prometheus-reload=true"
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+    expose:
+      - 9097
+    networks:
+      - net
+    depends_on:
+      - prometheus
+
+  alertmanager:
+    image: yunling101/alertmanager:${ALERTMANAGER_VERSION}
+    container_name: ${NAME}_alertmanager
+    restart: always
+    volumes:
+      - ${DEPLOY_DIR}/alertmanager/config:/opt/alertmanager/config
+      - ${DEPLOY_DIR}/alertmanager/data:/opt/alertmanager/data
+      - ${DEPLOY_DIR}/alertmanager/template:/opt/alertmanager/template
+    ports:
+      - 0.0.0.0:9093:9093
+    expose:
+      - 9093
+    networks:
+      - net
+
+  prometheus:
+    image: yunling101/prometheus:${PROMETHEUS_VERSION}
+    container_name: ${NAME}_prometheus
+    restart: always
+    volumes:
+      - type: bind
+        source: ../prometheus/prometheus.yml
+        target: /opt/prometheus/config/prometheus.yml
+        read_only: true
+      - ${DEPLOY_DIR}/prometheus/data:/opt/prometheus/data
+      - ${DEPLOY_DIR}/prometheus/rules:/opt/prometheus/rules
+    command:
+      - "--config.file=/opt/prometheus/config/prometheus.yml"
+      - "--storage.tsdb.path=/opt/prometheus/data"
+      - "--storage.tsdb.retention.time=1y"
+      - "--web.enable-lifecycle"
+    ports:
+      - 0.0.0.0:9090:9090
+    expose:
+      - 9090
+    networks:
+      - net
+    depends_on:
+      - consul
+
+  consul:
+    image: yunling101/consul:${CONSUL_VERSION}
+    container_name: ${NAME}_consul
+    restart: always
+    volumes:
+      - ${DEPLOY_DIR}/consul/data:/opt/consul/data
+      - ${DEPLOY_DIR}/consul/config:/opt/consul/config
+    ports:
+      - 0.0.0.0:8500:8500
+    expose:
+      - 8500
+    networks:
+      - net
+
+  mysql:
+    image: mysql:${MYSQL_VERSION}
+    container_name: ${NAME}_mysql
+    restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --password="${MYSQL_PASSWORD}" --silent']
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+    volumes:
+      - ${DEPLOY_DIR}/mysql/data:/var/lib/mysql
+    networks:
+      - net
+
+  redis:
+    image: redis:${REDIS_VERSION}
+    container_name: ${NAME}_redis
+    restart: always
+    volumes:
+      - ${DEPLOY_DIR}/redis:/data
+    healthcheck:
+      test: ['CMD-SHELL', 'redis-cli ping']
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.16.10.0/24"

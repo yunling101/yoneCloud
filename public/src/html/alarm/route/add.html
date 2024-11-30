@@ -1,0 +1,57 @@
+<div class="content">
+    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST"
+        action="/alarm/route/add/">
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">路由名称:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" class="form-control" name="name" placeholder="路由名称" data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">报警分组:</label>
+            <div class="col-xs-12 col-sm-8">
+                <small class="text-muted"><i class="fa fa-info-circle"></i> 接收到报警后重新分组如: alertname=Disk
+                    这样的标签将会被聚合到一个分组里;多个逗号隔开</small>
+                <input type="text" class="form-control" name="group_by" value="alertname" data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">等待时间:</label>
+            <div class="col-xs-12 col-sm-8">
+                <small class="text-muted"><i class="fa fa-info-circle"></i> 一个新的报警分组被创建后, 需要等待的初始化通知时间</small>
+                <input type="text" class="form-control" name="group_wait" value="30s" data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">间隔时间:</label>
+            <div class="col-xs-12 col-sm-8">
+                <small class="text-muted"><i class="fa fa-info-circle"></i> 当第一个报警发送后, 发送新报警分组的间隔时间</small>
+                <input type="text" class="form-control" name="group_interval" value="300s" data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">重复时间:</label>
+            <div class="col-xs-12 col-sm-8">
+                <small class="text-muted"><i class="fa fa-info-circle"></i> 上次报警发出后, 重新发送的间隔时间</small>
+                <input type="text" class="form-control" name="repeat_interval" value="4h" data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">匹配标签:</label>
+            <div class="col-xs-12 col-sm-8">
+                <small class="text-muted"><i class="fa fa-info-circle"></i> 路由匹配报警规则的标签,
+                    k/v格式一行一条，如：severity:critical</small>
+                <textarea class="form-control" name="match" placeholder="severity:critical" rows="4"></textarea>
+            </div>
+        </div>
+
+        <input type="text" class="form-control hide" name="route_id" />
+        <div class="form-group layer-footer">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-12 col-sm-8">
+                <button type="submit" class="btn btn-success btn-embossed">确认</button>
+                <button type="reset" class="btn btn-default btn-embossed">重置</button>
+            </div>
+        </div>
+    </form>
+</div>

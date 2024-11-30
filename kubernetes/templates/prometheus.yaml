@@ -1,0 +1,154 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: prometheus-config
+  namespace: yonecloud
+  labels:
+    app: prometheus
+data:
+  prometheus.yml: |-
+    global:
+      # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+      scrape_interval: 60s
+      # How long until a scrape request times out.
+      scrape_timeout: 10s
+      # Evaluate rules every 15 seconds. The default is every 1 minute.
+      evaluation_interval: 60s
+
+    alerting:
+      alertmanagers:
+        - static_configs:
+            - targets:
+               - ${ALERTMANAGER_HOST}:9093
+
+    # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+    rule_files:
+      - /opt/prometheus/rules/*.rules
+
+    # A scrape configuration containing exactly one endpoint to scrape:
+    # Here it's Prometheus itself.
+    scrape_configs:
+      # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+      - job_name: "prometheus"
+        # metrics_path defaults to '/metrics'
+        # scheme defaults to 'http'.
+        static_configs:
+          - targets: ["localhost:9090"]
+
+      - job_name: 'node'
+        consul_sd_configs:
+          - server: ${CONSUL_HOST}:${CONSUL_PORT}
+            services: []
+        relabel_configs:
+          - source_labels: [__meta_consul_service_id]
+            regex: consul
+            action: drop
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yone-prometheus-svc
+  namespace: yonecloud
+  labels:
+    app: prometheus
+spec:
+  ports:
+    - name: prometheus
+      port: 9090
+    - name: prometheus-plug
+      port: 9097
+  selector:
+    app: prometheus
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yone-prometheus
+  namespace: yonecloud
+  labels:
+    app: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+        - name: prometheus
+          image: yunling101/prometheus:${PROMETHEUS_VERSION}
+          args:
+            - "--config.file=/opt/prometheus/config/prometheus.yml"
+            - "--storage.tsdb.path=/opt/prometheus/data"
+            - "--storage.tsdb.retention.time=1y"
+            - "--web.enable-lifecycle"
+          ports:
+            - containerPort: 9090
+          readinessProbe:
+            initialDelaySeconds: 5
+            tcpSocket:
+              port: 9090
+            periodSeconds: 10
+            timeoutSeconds: 3
+          volumeMounts:
+            - name: data
+              mountPath: /opt/prometheus/data
+            - name: rules
+              mountPath: /opt/prometheus/rules
+            - name: config
+              mountPath: /opt/prometheus/config/prometheus.yml
+              subPath: prometheus.yml
+        - name: prometheus-plug
+          image: yunling101/prometheus-plug:${BASE_VERSION}
+          args:
+            - "--prometheus-rules-store-dir=/opt/rules"
+            - "--prometheus-listen-address=http://localhost:9090"
+            - "--prometheus-reload=true"
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: yone-secret-key
+                  key: SECRET_KEY
+          ports:
+            - containerPort: 9097
+          readinessProbe:
+            initialDelaySeconds: 5
+            tcpSocket:
+              port: 9097
+            periodSeconds: 10
+            timeoutSeconds: 3
+          volumeMounts:
+            - name: rules
+              mountPath: /opt/rules
+      volumes:
+        - name: data
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: prometheus-k8s-data
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 50Gi
+        - name: rules
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: prometheus-k8s-rules
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 100Mi
+        - name: config
+          configMap:
+            name: prometheus-config

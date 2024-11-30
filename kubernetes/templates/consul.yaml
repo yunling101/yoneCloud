@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: yone-consul-svc
+  namespace: yonecloud
+  labels:
+    app: consul
+spec:
+  type: ClusterIP
+  ports:
+    - name: consul
+      port: 8500
+  selector:
+    app: consul
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yone-consul
+  namespace: yonecloud
+  labels:
+    app: consul
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consul
+  template:
+    metadata:
+      labels:
+        app: consul
+    spec:
+      containers:
+        - name: consul
+          image: yunling101/consul:${CONSUL_VERSION}
+          ports:
+            - containerPort: 8500
+          readinessProbe:
+            initialDelaySeconds: 5
+            tcpSocket:
+              port: 8500
+            periodSeconds: 10
+            timeoutSeconds: 3
+          volumeMounts:
+            - name: data
+              mountPath: /opt/consul/data
+            - name: config
+              mountPath: /opt/consul/config
+      volumes:
+        - name: data
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: consul-k8s-data
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 1Gi
+        - name: config
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: consul-k8s-config
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 1Mi

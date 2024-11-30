@@ -1,0 +1,101 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: redis-config
+  namespace: yonecloud
+  labels:
+    app: redis
+data:
+  redis.conf: |-
+    rdbchecksum yes
+    dbfilename dump.rdb
+    dir /data
+
+    stop-writes-on-bgsave-error yes
+    rdbcompression yes
+
+    bind 0.0.0.0
+    protected-mode yes
+    port 6379
+
+    tcp-backlog 511
+    timeout 0
+
+    tcp-keepalive 300
+    daemonize no
+
+    appendonly no
+    appendfilename "appendonly.aof"
+
+    pidfile /data/redis.pid
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yone-redis-svc
+  namespace: yonecloud
+  labels:
+    app: redis
+spec:
+  type: ClusterIP
+  ports:
+    - name: redis
+      port: 6379
+  selector:
+    app: redis
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yone-redis
+  namespace: yonecloud
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:${REDIS_VERSION}
+          command:
+            - "sh"
+            - "-c"
+            - "redis-server /usr/local/etc/redis/redis.conf"
+          ports:
+            - containerPort: 6379
+          readinessProbe:
+            initialDelaySeconds: 5
+            tcpSocket:
+              port: 6379
+            periodSeconds: 10
+            timeoutSeconds: 3
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: config
+              mountPath: /usr/local/etc/redis/redis.conf
+              subPath: redis.conf
+      volumes:
+        - name: data
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: redis-k8s-volume
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 1Gi
+                volumeMode: Filesystem
+        - name: config
+          configMap:
+            name: redis-config

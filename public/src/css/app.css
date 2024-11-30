@@ -1,0 +1,432 @@
+@import url("../css/bootstrap.min.css");
+@import url("../css/iconfont.css");
+@import url("../css/font-awesome.min.css");
+@import url("../css/toastr.min.css");
+@import url("../css/animate.css");
+@import url("../css/style.css");
+@import url("../css/layer.css");
+@import url("../css/bootstrap-table.min.css");
+@import url("../css/daterangepicker.css");
+@import url("../css/jquery.validator.css");
+@import url("../css/bootstrap-select.css");
+@import url("../css/jstree.css");
+@import url("../css/xterm.css");
+/* @import url("../css/codemirror.css"); */
+
+body {
+    background-color: #222d32;
+}
+/* 修复问题 */
+.show {
+    display: inline-block!important;
+}
+.tab-content .show {
+    display: block!important;
+}
+.nav-header {
+    padding: 15px 25px;
+    color: white;
+    text-align: center;
+    background-color: #222d32;
+}
+.nav>li.active {
+    border-left: none;
+    background: #1e282c;
+}
+.navbar-default .nav>li>a:focus, .navbar-default .nav>li>a:hover {
+    background-color: #1e282c;
+    color: #fff;
+}
+ul.nav-second-level {
+    background: #1e282c;
+}
+.text-success {
+    color: #439a43!important;
+}
+
+/*去除bootstrap-table的边框*/
+.fixed-table-container {
+  border: none !important;
+}
+.bootstrap-table .fixed-table-toolbar .dropdown-menu {
+  overflow: auto;
+}
+.bootstrap-table .fa-toggle-on.fa-2x {
+  font-size: 1.86em;
+}
+.bootstrap-table .form-commonsearch .form-group {
+  margin-left: 0;
+  margin-right: 0;
+  white-space: nowrap;
+}
+.toolbar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.fixed-table-toolbar .bs-bars,
+.fixed-table-toolbar .columns,
+.fixed-table-toolbar .search {
+  line-height: inherit;
+}
+.fixed-table-toolbar .toolbar {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.bootstrap-table table tbody tr:first-child td .bs-checkbox {
+  vertical-align: middle;
+}
+.bootstrap-table td.bs-checkbox {
+  vertical-align: middle;
+}
+
+/* layer 部分优化 */
+.layui-layer-page .layui-layer-content {
+  overflow: hidden;
+}
+.layui-layer-fast {
+  /*自定义底部灰色操作区*/
+}
+.layui-layer-fast .layui-layer-title {
+  background: #2c3e50 !important;
+  color: #fff !important;
+  border-bottom: none;
+}
+.layui-layer-fast .layui-layer-title ~ .layui-layer-setwin {
+  top: 0px;
+  height: 42px;
+}
+.layui-layer-fast .layui-layer-title ~ .layui-layer-setwin > a {
+  height: 42px;
+  line-height: 42px;
+  display: inline-block;
+}
+.layui-layer-fast.layui-layer-border {
+  border: none !important;
+  box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3) !important;
+}
+.layui-layer-fast.layui-layer-iframe {
+  overflow: visible;
+}
+.layui-layer-fast .layui-layer-moves {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.layui-layer-fast .layui-layer-btn {
+  text-align: center !important;
+  padding: 10px !important;
+  background: #ecf0f1;
+  overflow: hidden;
+}
+.layui-layer-fast .layui-layer-btn a {
+  background-color: #95a5a6;
+  border-color: #95a5a6;
+  color: #fff !important;
+  height: 31px;
+  margin-top: 0;
+  border: 1px solid transparent;
+}
+.layui-layer-fast .layui-layer-btn .layui-layer-btn0 {
+  background-color: #18bc9c;
+  border-color: #18bc9c;
+}
+.layui-layer-fast .layui-layer-footer {
+  padding: 8px 20px;
+  background-color: #ecf0f1;
+  height: auto;
+  text-align: inherit !important;
+}
+.layui-layer-fast .layui-layer-setwin > a {
+  background: none !important;
+}
+.layui-layer-fast .layui-layer-setwin > a cite {
+  display: none;
+}
+.layui-layer-fast .layui-layer-setwin > a:after {
+  content: "\e625";
+  font-family: iconfont;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  position: absolute;
+  font-size: 18px;
+  color: #fff;
+  margin: 0;
+  z-index: 1;
+}
+.layui-layer-fast .layui-layer-setwin > a:hover {
+  text-decoration: none !important;
+  background: none !important;
+}
+.layui-layer-fast .layui-layer-setwin > a:focus {
+  text-decoration: none !important;
+}
+.layui-layer-fast .layui-layer-setwin .layui-layer-min {
+  display: none;
+}
+.layui-layer-fast .layui-layer-setwin .layui-layer-min:after {
+  content: "\e625";
+}
+.layui-layer-fast .layui-layer-setwin .layui-layer-max {
+  display: none;
+}
+.layui-layer-fast .layui-layer-setwin .layui-layer-max:after {
+  content: "\e623";
+}
+.layui-layer-fast .layui-layer-setwin .layui-layer-maxmin {
+  display: none;
+}
+.layui-layer-fast .layui-layer-setwin .layui-layer-maxmin:after {
+  content: "\e624";
+}
+.layui-layer-fast .layui-layer-setwin .layui-layer-close1:after {
+  content: "\e626";
+}
+.layui-layer-fast .layui-layer-setwin .layui-layer-close2,
+.layui-layer-fast .layui-layer-setwin .layui-layer-close2:hover {
+  background: url('../js/theme/default/icon.png') no-repeat -149px -31px !important;
+  top: -30px;
+  right: -30px;
+}
+.layui-layer-fast .layui-layer-setwin .layui-layer-close2:after,
+.layui-layer-fast .layui-layer-setwin .layui-layer-close2:hover:after {
+  display: none;
+}
+
+/*修复radio和checkbox样式对齐*/
+.radio > label,
+.checkbox > label {
+  margin-right: 10px;
+}
+.radio > label > input,
+.checkbox > label > input {
+  margin: 2px 0 0;
+}
+
+/* 补全nav tabs样式*/
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}
+
+/* add from 上边距问题 */
+.content {
+    margin-top: 20px
+}
+
+/* jstree 样式处理*/
+#authTree .jstree-container-ul .jstree-node {
+  display: block;
+  clear: both;
+}
+#authTree .jstree-leaf:not(:first-child) {
+  float: left;
+  background: none;
+  margin-left: 0;
+  min-width: 80px;
+  clear: none;
+}
+#authTree .jstree-leaf {
+  float: left;
+  margin-left: 0;
+  padding-left: 24px;
+  min-width: 80px;
+  clear: none;
+  color: #777;
+}
+#authTree .jstree-leaf > .jstree-icon,
+#authTree .jstree-leaf .jstree-themeicon {
+  display: none;
+}
+#authTree .jstree-last {
+  background-image: url("../img/32px.png");
+  background-position: -292px -4px;
+  background-repeat: repeat-y;
+}
+#authTree .jstree-children:before,
+#authTree .jstree-children:after {
+  content: " ";
+  display: table;
+}
+#authTree .jstree-children:after {
+  clear: both;
+}
+#authTree .jstree-themeicon {
+  display: none;
+}
+#assetTree .jstree-themeicon {
+  display: none;
+}
+
+/* Logo 样式 */
+.basic-logo > img {
+  background-color: #e9ebef;
+  margin-bottom: 10px;
+  max-width: 260px;
+}
+
+.nav-logo {
+  line-height:70px;
+}
+.nav-logo > img {
+  width: 115.50px;
+  height: 18px;
+}
+
+/* Nav 补充样式 */
+.nav-li-label {
+  padding: 10px 20px 14px 25px;
+}
+.cadetblue {
+  color: #1c98c7;
+}
+.float-right {
+  float: right!important;
+}
+
+/* 加载动画 */
+.content > .sk-spinner {
+  display: none;
+}
+.content.sk-loading {
+  position: relative;
+}
+.content.sk-loading:after {
+  content: '';
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.content.sk-loading > .sk-spinner {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+}
+/* 左侧导航开关按钮样式 */
+.app-minimalize {
+    color: #676a6c;
+    margin-left: 14px;
+}
+/* app模块按钮样式 */
+.app-down {
+    float: left;
+}
+.app-down > a {
+    background-color: cornflowerblue;
+    margin-left: 0px;
+    border-radius: .25em;
+}
+.app-down > a > i {
+    color: white;
+}
+.app-down > .dropdown-menu {
+    right: auto;
+    left: 0;
+}
+@media (min-width: 992px) {
+    .app-down-px-lg-2 {
+        padding: .5rem!important;
+    }
+}
+@media (min-width: 600px) {
+    .dropdown-menu-lg {
+        width: 320px;
+    }
+}
+.app-down-no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+.app-down-row {
+   display: flex;
+   flex-wrap: wrap;
+}
+.app-down-no-gutters>.app-down-col{
+    padding-right: 0;
+    padding-left: 0;
+}
+.app-down-col {
+    flex-basis: 0;
+    flex-grow: 1;
+    min-width: 0;
+    max-width: 100%;
+
+    position: relative;
+    width: 100%;
+    padding-right: 12px;
+    padding-left: 12px;
+}
+.app-down-col > a:hover {
+    background-color: aliceblue;
+}
+.dropdown-icon-item {
+    border-radius: 3px;
+    line-height: 34px;
+    text-align: center;
+    padding: 10px 10px;
+    display: block;
+    border: 1px solid transparent;
+}
+.dropdown-icon-item img {
+    height: 24px;
+}
+.dropdown-icon-item span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 以下是为集群模块添加的 */
+/* dropdown-toggle 下拉图标样式 */
+.top-navigation .wrapper.wrapper-content {
+    padding: 0px 40px 40px 40px!important;
+}
+.top-navigation .nav>li>a {
+    color: white;
+}
+.top-navigation .nav>li a:focus, .top-navigation .nav>li a:hover {
+    background-color: #2b3c4e;
+    color: #fff;
+    text-decoration: none;
+}
+.top-navigation .nav>li:first-child {
+    pointer-events: none;
+}
+/*
+.dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+*/
+.border-lrb {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+.top-navigation .navbar-static-top {
+    background: #34495e!important;
+}
+.mr-auto, .mx-auto {
+    margin-right: auto!important;
+}

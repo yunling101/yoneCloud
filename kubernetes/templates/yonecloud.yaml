@@ -1,0 +1,162 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: yonecloud-config
+  namespace: yonecloud
+  labels:
+    app: yonecloud
+data:
+  default.ini: |-
+    [Main]
+    api_docs = true
+    debug = ${DEBUG}
+    work_dir = ${WORK_DIR}
+    allow = ${ALLOW_HOSTS}
+
+    [Mysql]
+    host = ${MYSQL_HOST}
+    username = ${MYSQL_USER}
+    password = ${MYSQL_PASSWORD}
+    port = ${MYSQL_PORT}
+    database = ${MYSQL_DATABASE}
+    table_prefix = ${MYSQL_PREFIX}
+
+    [Redis]
+    host = ${REDIS_HOST}
+    port = ${REDIS_PORT}
+    password = ${REDIS_PASSWORD}
+    database = 0
+
+    [ControllerManager]
+    address = http://${CTR_MANAGER_HOST}:9096
+    secret_key = ${SECRET_KEY}
+  monitor.yml: |-
+    alertmanager:
+      address: ${ALERTMANAGER_HOST}
+      basic_password: ''
+      basic_user: ''
+      plug: http://${ALERTMANAGER_PLUG_HOST}:9098
+      secret_key: ${SECRET_KEY}
+    consul:
+      address: ${CONSUL_HOST}
+      port: ${CONSUL_PORT}
+      token: ${CONSUL_TOKEN}
+    grafana:
+      address: http://${GRAFANA_DOMAIN}
+      link: 'true'
+    prometheus:
+      address: ${PROMETHEUS_HOST}
+      basic_password: ''
+      basic_user: ''
+      plug: http://${PROMETHEUS_PLUG_HOST}:9097
+      secret_key: ${SECRET_KEY}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yone-yonecloud-svc
+  namespace: yonecloud
+  labels:
+    app: yonecloud
+spec:
+  type: ClusterIP
+  ports:
+    - name: yonecloud
+      port: 8080
+  selector:
+    app: yonecloud
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yone-yonecloud
+  namespace: yonecloud
+  labels:
+    app: yonecloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yonecloud
+  template:
+    metadata:
+      labels:
+        app: yonecloud
+    spec:
+      serviceAccountName: config-reloader-sa
+      initContainers:
+        - name: copy-config
+          image: yunling101/yonecloud:${BASE_VERSION}
+          command: ["sh", "-c", "cp -f /yoneCloud/webserver/config-file/default.ini /yoneCloud/webserver/config;if [ ! -f /yoneCloud/webserver/config/monitor.yml ]; then cp -f /yoneCloud/webserver/config-file/monitor.yml /yoneCloud/webserver/config; fi"]
+          volumeMounts:
+            - name: config-file
+              mountPath: /yoneCloud/webserver/config-file
+            - name: config
+              mountPath: /yoneCloud/webserver/config
+        - name: wait-for-grafana
+          image: busybox
+          command: ['sh', '-c', 'until nc -z yone-grafana-svc 3000; do echo waiting for grafana; sleep 2; done;']
+      containers:
+        - name: yonecloud
+          image: yunling101/yonecloud:${BASE_VERSION}
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            initialDelaySeconds: 5
+            tcpSocket:
+              port: 8080
+            periodSeconds: 10
+            timeoutSeconds: 3
+          env:
+            - name: GRAFANA_URL
+              value: http://${GRAFANA_HOST}:3000
+            - name: DATA_SOURCE_URL
+              value: http://${PROMETHEUS_HOST}:9090
+          volumeMounts:
+            - name: config-file
+              mountPath: /yoneCloud/webserver/config-file
+            - name: config
+              mountPath: /yoneCloud/webserver/config
+            - name: media
+              mountPath: /yoneCloud/webserver/media
+        - name: config-reloader
+          image: yunling101/config-reloader:${BASE_VERSION}
+          args:
+             - "--namespace=yonecloud"
+             - "--file-to-configmap=/yoneCloud/webserver/config/monitor.yml:yonecloud-config"
+          volumeMounts:
+            - name: config
+              mountPath: /yoneCloud/webserver/config
+      volumes:
+        - name: config
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: yonecloud-k8s-config
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 1Mi
+        - name: media
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: yonecloud-k8s-media
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 10Gi
+        - name: config-file
+          configMap:
+            name: yonecloud-config
+            items:
+              - key: "default.ini"
+                path: "default.ini"
+              - key: "monitor.yml"
+                path: "monitor.yml"

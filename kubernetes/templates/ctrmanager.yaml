@@ -1,0 +1,75 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ctrmanager-config
+  namespace: yonecloud
+  labels:
+    app: ctrmanager
+data:
+  config.yml: |-
+    secret_key: "${SECRET_KEY}"
+    oauth_encrypt_key: "SW2YcwTIb9zpOOhoPsMm"
+
+    db_host: "${MYSQL_HOST}"
+    db_username: "${MYSQL_USER}"
+    db_password: "${MYSQL_PASSWORD}"
+    db_port: ${MYSQL_PORT}
+    db_database: "${MYSQL_DATABASE}"
+
+    table_prefix: "${MYSQL_PREFIX}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yone-ctrmanager-svc
+  namespace: yonecloud
+  labels:
+    app: ctrmanager
+spec:
+  type: ClusterIP
+  ports:
+    - name: ctrmanager
+      port: 9096
+  selector:
+    app: ctrmanager
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yone-ctrmanager
+  namespace: yonecloud
+  labels:
+    app: ctrmanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ctrmanager
+  template:
+    metadata:
+      labels:
+        app: ctrmanager
+    spec:
+      initContainers:
+        - name: wait-for-mysql
+          image: busybox
+          command: ['sh', '-c', 'until nc -z yone-mysql-svc 3306; do echo waiting for mysql; sleep 2; done;']
+      containers:
+        - name: ctrmanager
+          image: yunling101/ctrmanager:${BASE_VERSION}
+          ports:
+            - containerPort: 9096
+          readinessProbe:
+            initialDelaySeconds: 5
+            tcpSocket:
+              port: 9096
+            periodSeconds: 10
+            timeoutSeconds: 3
+          volumeMounts:
+            - name: config
+              mountPath: /opt/conf/config.yml
+              subPath: config.yml
+      volumes:
+        - name: config
+          configMap:
+            name: ctrmanager-config

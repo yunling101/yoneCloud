@@ -1,0 +1,256 @@
+<div role="tabpanel" class="tab-pane active in" id="consul">
+    <div class="panel-body">
+        <form id="consul-form" role="consul-form" data-toggle="validator" method="POST" action="monitor/config"
+            novalidate="novalidate" class="nice-validator n-default n-bootstrap">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>服务地址</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" name="address" value="<%= v.consul.address %>"
+                                        class="form-control" data-tip="请填写服务地址" data-rule="required">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>服务端口</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" name="port" value="<%= v.consul.port %>" class="form-control"
+                                        data-tip="请填写服务端口" data-rule="required">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>访问Token</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" name="token" value="<%= v.consul.token %>" class="form-control"
+                                        data-tip="请填写访问Token">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input type="text" name="id" value="consul" class="form-control hide"></td>
+                        <td><button type="submit" class="btn btn-success btn-embossed">确定</button>
+                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>
+
+<div role="tabpanel" class="tab-pane" id="prometheus">
+    <div class="panel-body">
+        <form id="prometheus-form" role="prometheus-form" data-toggle="validator" method="POST" action="monitor/config"
+            novalidate="novalidate" class="nice-validator n-default n-bootstrap">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>服务地址</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" name="address" value="<%= v.prometheus.address %>"
+                                        class="form-control" data-tip="请填写服务地址" data-rule="required">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Basic User</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" name="basic_user" value="<%= v.prometheus.basic_user %>"
+                                        class="form-control" data-tip="请填写Basic User">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Basic Password</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="password" name="basic_password"
+                                        value="<%= v.prometheus.basic_password %>" class="form-control"
+                                        data-tip="请填写Basic Password">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Plug 地址</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" name="plug" value="<%= v.prometheus.plug %>" class="form-control"
+                                        data-tip="请填写Plug 地址">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Plug 秘钥</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="password" name="secret_key" value="<%= v.prometheus.secret_key %>"
+                                        class="form-control" data-tip="请填写Plug 秘钥">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input type="text" name="id" value="prometheus" class="form-control hide"></td>
+                        <td><button type="submit" class="btn btn-success btn-embossed">确定</button>
+                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>
+
+<div role="tabpanel" class="tab-pane" id="alertmanager">
+    <div class="panel-body">
+        <form id="alertmanager-form" role="alertmanager-form" data-toggle="validator" method="POST"
+            action="monitor/config" novalidate="novalidate" class="nice-validator n-default n-bootstrap">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>服务地址</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" name="address" value="<%= v.alertmanager.address %>"
+                                        class="form-control" data-tip="请填写服务地址" data-rule="required">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Basic User</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" name="basic_user" value="<%= v.alertmanager.basic_user %>"
+                                        class="form-control" data-tip="请填写Basic User">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Basic Password</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="password" name="basic_password"
+                                        value="<%= v.alertmanager.basic_password %>" class="form-control"
+                                        data-tip="请填写Basic Password">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Plug 地址</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" name="plug" value="<%= v.alertmanager.plug %>"
+                                        class="form-control" data-tip="请填写Plug 地址">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Plug 秘钥</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="password" name="secret_key" value="<%= v.alertmanager.secret_key %>"
+                                        class="form-control" data-tip="请填写Plug 秘钥">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input type="text" name="id" value="alertmanager" class="form-control hide"></td>
+                        <td>
+                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>
+
+<div role="tabpanel" class="tab-pane" id="grafana">
+    <div class="panel-body">
+        <form id="grafana-form" role="grafana-form" data-toggle="validator" method="POST" action="monitor/config"
+            novalidate="novalidate" class="nice-validator n-default n-bootstrap">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>服务地址</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="text" name="address" value="<%= v.grafana.address %>"
+                                        class="form-control" data-tip="请填写服务地址" data-rule="required">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>快捷链接</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-12">
+                                    <select name="link" class="form-control" data-tip="请填写快捷链接">
+                                        <% if (v.grafana.link=="true" ){ %>
+                                            <option value="true" selected>开启</option>
+                                            <option value="false">关闭</option>
+                                            <% }else{ %>
+                                                <option value="false" selected>关闭</option>
+                                                <option value="true">开启</option>
+                                                <% }; %>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input type="text" name="id" value="grafana" class="form-control hide">
+                        </td>
+                        <td><button type="submit" class="btn btn-success btn-embossed">确定</button>
+                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>

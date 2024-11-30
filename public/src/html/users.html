@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-lg-8">
+        <div class="ibox ">
+            <div class="ibox-content">
+                <div>
+                    <canvas id="lineChart" height="102"></canvas>
+                </div>
+                <div class="m-t-md">
+                    <small class="float-right">
+                        <i class="fa fa-clock-o"> </i>
+                        <span id="weekDate"></span>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>近期事件</h5>
+            </div>
+            <div class="ibox-content no-padding" style="min-height: 300px;">
+                <ul class="list-group" id="EventList">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>所有主机</h5>
+                <span class="label label-primary">Hosts</span>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins" id="indexHosts">0</h1>
+                <small>hosts</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>所有业务</h5>
+                <span class="label label-info">Business</span>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins" id="indexBusiness">0</h1>
+                <small>business</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>所有事件</h5>
+                <span class="label label-warning">Events</span>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins" id="indexEvent">0</h1>
+                <small>events</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>最近登录记录</h5>
+            </div>
+            <div class="ibox-content no-padding" style="min-height: 300px;">
+                <ul class="list-group" id="loginRecord">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>最近操作记录</h5>
+                <span class="label label-success">时间线</span>
+            </div>
+            <div class="ibox-content inspinia-timeline" id="optionRecord" style="min-height:300px;"></div>
+        </div>
+    </div>
+</div>

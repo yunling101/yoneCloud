@@ -1,0 +1,37 @@
+global:
+  # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  scrape_interval: 60s
+  # How long until a scrape request times out.
+  scrape_timeout: 10s
+  # Evaluate rules every 15 seconds. The default is every 1 minute.
+  evaluation_interval: 60s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+           - yone_alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - /opt/prometheus/rules/*.rules
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "prometheus"
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: 'node'
+    consul_sd_configs:
+      - server: yone_consul:8500
+      # token: '70a4152b-c205-d286-43d7-01472fcddd38'
+        services: []
+    relabel_configs:
+      - source_labels: [__meta_consul_service_id]
+        regex: consul
+        action: drop

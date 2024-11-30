@@ -1,0 +1,37 @@
+<div class="content">
+    <div class="sk-spinner sk-spinner-double-bounce">
+        <div class="sk-double-bounce1"></div>
+        <div class="sk-double-bounce2"></div>
+    </div>
+    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST"
+        action="/resources/hosts/group/">
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">分组名称:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" class="form-control" name="name" placeholder="分组名称" data-rule="required;name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">选择主机:</label>
+            <div class="col-xs-12 col-sm-8">
+                <select class="form-control" multiple id="select_hosts" name="select_hosts">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">备注信息:</label>
+            <div class="col-xs-12 col-sm-8">
+                <textarea class="form-control" name="comment" id="comment" placeholder="备注信息" rows="4"></textarea>
+            </div>
+        </div>
+
+        <input type="text" class="form-control hide" name="id" />
+        <div class="form-group layer-footer">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-12 col-sm-8">
+                <button type="submit" class="btn btn-success btn-embossed">确认</button>
+                <button type="reset" class="btn btn-default btn-embossed">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
