@@ -20,6 +20,9 @@ init_config()
     [ -d ${SETUP_DIR}/ctrmanager ] || mkdir -p ${SETUP_DIR}/ctrmanager
     [ -d ${SETUP_DIR}/yonecloud ] || mkdir -p ${SETUP_DIR}/yonecloud
 
+    # 需要安装 envsubst 命令
+    # apt install gettext
+    
     envsubst < ${SETUP_DIR}/default/env.config.yml > ${SETUP_DIR}/ctrmanager/config.yml
     envsubst < ${SETUP_DIR}/default/env.default.ini > ${SETUP_DIR}/yonecloud/default.ini
     envsubst < ${SETUP_DIR}/default/env.monitor.yml > ${SETUP_DIR}/yonecloud/monitor.yml
