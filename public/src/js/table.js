@@ -1,3 +1,11 @@
+function get_lang() {
+    var language = localStorage.getItem("language");
+    if (language && language != "") {
+        return language;
+    }
+    return "zh-CN";
+}
+
 var Table = {
     list: {},
     // Bootstrap-table 基础配置
@@ -27,16 +35,16 @@ var Table = {
         singleSelect: false, //是否启用单选
         showRefresh: false,
         showJumpto: true,
-        locale: 'zh-CN',
+        locale: get_lang(),
         showToggle: true,
         showColumns: true,
         pk: 'id',
         // sortName: 'id',
         sortOrder: 'desc',
-        paginationFirstText: "首页",
-        paginationPreText: "上一页",
-        paginationNextText: "下一页",
-        paginationLastText: "尾页",
+        paginationFirstText: '&laquo;',
+        paginationPreText: '&lsaquo;',
+        paginationNextText: '&rsaquo;',
+        paginationLastText: '&raquo;',
         cardView: false, //卡片视图
         checkOnInit: true, //是否在初始化时判断
         escape: true, //是否对内容进行转义

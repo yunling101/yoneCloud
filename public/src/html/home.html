@@ -1,7 +1,9 @@
 <div class="alert alert-info alert-dismissable">
     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
     <strong>
-        <h4>今日，</h4>
+        <h4>
+            <%= L('Today') %>，
+        </h4>
     </strong> <span id="wlc-info"></span>
 </div>
 <div class="row">
@@ -9,7 +11,9 @@
         <div class="ibox ">
             <div class="ibox-title">
                 <!-- float-right -->
-                <span class="label label-success">用户</span>
+                <span class="label label-success">
+                    <%= L('User') %>
+                </span>
             </div>
             <div class="ibox-content">
                 <h1 class="no-margins" id="indexUser"></h1>
@@ -21,7 +25,9 @@
     <div class="col-lg-2">
         <div class="ibox ">
             <div class="ibox-title">
-                <span class="label label-info">主机</span>
+                <span class="label label-info">
+                    <%= L('Hosts') %>
+                </span>
             </div>
             <div class="ibox-content">
                 <h1 class="no-margins" id="indexHosts"></h1>
@@ -33,20 +39,26 @@
     <div class="col-lg-4">
         <div class="ibox ">
             <div class="ibox-title">
-                <span class="label label-primary">业务</span>
+                <span class="label label-primary">
+                    <%= L('Business') %>
+                </span>
             </div>
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-6">
                         <h1 class="no-margins" id="indexBusiness"></h1>
                         <div class="font-bold text-navy">0.00% <i class="fa fa-level-up"></i>
-                            <small>业务</small>
+                            <small>
+                                <%= L('Business') %>
+                            </small>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <h1 class="no-margins" id="indexCluster"></h1>
                         <div class="font-bold text-navy">0.00% <i class="fa fa-level-up"></i>
-                            <small>其他</small>
+                            <small>
+                                <%= L('Other') %>
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -57,20 +69,28 @@
     <div class="col-lg-4">
         <div class="ibox ">
             <div class="ibox-title">
-                <h5>版本信息</h5>
+                <h5>
+                    <%= L('Version') %>
+                </h5>
             </div>
             <div class="ibox-content no-padding" style="min-height: 87px;">
                 <table class="table table-hover" width="100%">
                     <tbody>
                         <tr>
-                            <td>版本类型:</td>
+                            <td>
+                                <%= L('Type') %>:
+                            </td>
                             <td id="auth_type"></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td>当前版本:</td>
+                            <td>
+                                <%= L('Current') %>:
+                            </td>
                             <td id="auth_version"></td>
-                            <td><a href="javascript:;" id="check-update">检查更新</a></td>
+                            <td><a href="javascript:;" id="check-update">
+                                    <%= L('Check Update') %>
+                                </a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -84,7 +104,9 @@
         <div class="ibox ">
             <div class="ibox-content">
                 <div>
-                    <h4 class="font-bold no-margins">近7日资源增长</h4>
+                    <h4 class="font-bold no-margins">
+                        <%= L('Resource growth in the past 7 days') %>
+                    </h4>
                 </div>
                 <div class="m-t-sm">
                     <div class="row">
@@ -97,14 +119,18 @@
                             <ul class="stat-list m-t-lg">
                                 <li>
                                     <h2 class="no-margins" id="weekHosts"></h2>
-                                    <small>主机7日总数</small>
+                                    <small>
+                                        <%= L('Total number of hosts in 7 days') %>
+                                    </small>
                                     <div class="progress progress-mini">
                                         <div class="progress-bar" id="weekHostsBar"></div>
                                     </div>
                                 </li>
                                 <li>
                                     <h2 class="no-margins" id="weekBusiness"></h2>
-                                    <small>业务7日总数</small>
+                                    <small>
+                                        <%= L('Total business volume in 7 days') %>
+                                    </small>
                                     <div class="progress progress-mini">
                                         <div class="progress-bar" id="weekBusinessBar"></div>
                                     </div>
@@ -125,7 +151,9 @@
 
         <div class="ibox">
             <div class="ibox-title">
-                <h5>最近登录记录</h5>
+                <h5>
+                    <%= L('Recent Login Records') %>
+                </h5>
             </div>
             <div class="ibox-content no-padding">
                 <ul class="list-group" id="loginRecord">
@@ -137,8 +165,12 @@
     <div class="col-lg-4">
         <div class="ibox">
             <div class="ibox-title">
-                <h5>最近操作记录</h5>
-                <span class="label label-info">时间线</span>
+                <h5>
+                    <%= L('Recent Operation Records') %>
+                </h5>
+                <span class="label label-info">
+                    <%= L('Timeline') %>
+                </span>
             </div>
             <div class="ibox-content inspinia-timeline" id="optionRecord"></div>
         </div>

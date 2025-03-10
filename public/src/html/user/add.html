@@ -1,52 +1,77 @@
 <div class="content">
-    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="/user/add/">
+    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST"
+        action="/user/add/">
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">用户名:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Username')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="username" placeholder="用户名" data-rule="required"/>
+                <input type="text" class="form-control" name="username" placeholder="<%= L('Username')%>"
+                    data-rule="required" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">姓名:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Nickname')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="nickname" placeholder="真实姓名" data-rule="required" />
+                <input type="text" class="form-control" name="nickname" placeholder="<%= L('Nickname')%>"
+                    data-rule="required" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">邮箱:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Email')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="email" placeholder="邮箱地址" data-rule="required;email"/>
+                <input type="text" class="form-control" name="email" placeholder="<%= L('Email')%>"
+                    data-rule="required;email" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">密码:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Password')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="password" class="form-control" name="password" placeholder="初始密码" data-rule="required"/>
+                <input type="password" class="form-control" name="password" placeholder="<%= L('Password')%>"
+                    data-rule="required" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">状态:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Status')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <select class="form-control" id="is_active" name="is_active" data-rule="required">
-                    <option value="true">开启</option>
-                    <option value="false">禁用</option>
+                    <option value="true">
+                        <%= L('Enable')%>
+                    </option>
+                    <option value="false">
+                        <%= L('Disable')%>
+                    </option>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">角色:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Role')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <select class="form-control" id="role" name="role">
                 </select>
             </div>
         </div>
 
-        <input type="text" class="form-control hide" name="id"/>
+        <input type="text" class="form-control hide" name="id" />
         <div class="form-group layer-footer">
             <div class="col-xs-2"></div>
             <div class="col-xs-12 col-sm-8">
-                <button type="submit" class="btn btn-success btn-embossed">确认</button>
-                <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                <button type="submit" class="btn btn-success btn-embossed">
+                    <%= L('Confirm')%>
+                </button>
+                <button type="reset" class="btn btn-default btn-embossed">
+                    <%= L('Reset')%>
+                </button>
             </div>
         </div>
     </form>

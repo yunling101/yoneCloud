@@ -8,6 +8,7 @@ from webserver.settings import TablePrefix
 class Rule(models.Model):
     name = models.CharField(max_length=56, unique=True, verbose_name="名称")
     title = models.CharField(max_length=56, verbose_name="标题")
+    entitle = models.CharField(max_length=56, null=True, verbose_name="英文标题")
     pid = models.IntegerField(blank=True, null=False, verbose_name="父节点")
     icon = models.CharField(max_length=32, verbose_name="图标")
     weigh = models.IntegerField(blank=True, null=False, verbose_name="权重")

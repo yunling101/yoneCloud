@@ -5,34 +5,38 @@
             <table class="table table-striped">
                 <tbody>
                     <tr>
-                        <td>服务地址</td>
+                        <td>
+                            <%= L('Address')%>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" name="address" value="<%= v.consul.address %>"
-                                        class="form-control" data-tip="请填写服务地址" data-rule="required">
+                                        class="form-control" data-tip="<%= L('Address')%>" data-rule="required">
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>服务端口</td>
+                        <td>
+                            <%= L('Port')%>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" name="port" value="<%= v.consul.port %>" class="form-control"
-                                        data-tip="请填写服务端口" data-rule="required">
+                                        data-tip="<%= L('Port')%>" data-rule="required">
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>访问Token</td>
+                        <td>Token</td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" name="token" value="<%= v.consul.token %>" class="form-control"
-                                        data-tip="请填写访问Token">
+                                        data-tip="Token">
                                 </div>
                             </div>
                         </td>
@@ -41,8 +45,12 @@
                 <tfoot>
                     <tr>
                         <td><input type="text" name="id" value="consul" class="form-control hide"></td>
-                        <td><button type="submit" class="btn btn-success btn-embossed">确定</button>
-                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                        <td><button type="submit" class="btn btn-success btn-embossed">
+                                <%= L('Confirm')%>
+                            </button>
+                            <button type="reset" class="btn btn-default btn-embossed">
+                                <%= L('Reset')%>
+                            </button>
                         </td>
                     </tr>
                 </tfoot>
@@ -58,12 +66,14 @@
             <table class="table table-striped">
                 <tbody>
                     <tr>
-                        <td>服务地址</td>
+                        <td>
+                            <%= L('Address')%>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" name="address" value="<%= v.prometheus.address %>"
-                                        class="form-control" data-tip="请填写服务地址" data-rule="required">
+                                        class="form-control" data-tip="<%= L('Address')%>" data-rule="required">
                                 </div>
                             </div>
                         </td>
@@ -74,7 +84,7 @@
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" name="basic_user" value="<%= v.prometheus.basic_user %>"
-                                        class="form-control" data-tip="请填写Basic User">
+                                        class="form-control" data-tip="Basic User">
                                 </div>
                             </div>
                         </td>
@@ -86,29 +96,31 @@
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="password" name="basic_password"
                                         value="<%= v.prometheus.basic_password %>" class="form-control"
-                                        data-tip="请填写Basic Password">
+                                        data-tip="Basic Password">
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>Plug 地址</td>
+                        <td>Plug <%= L('Address')%>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" name="plug" value="<%= v.prometheus.plug %>" class="form-control"
-                                        data-tip="请填写Plug 地址">
+                                        data-tip="Plug <%= L('Address')%>">
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>Plug 秘钥</td>
+                        <td>Plug <%= L('Key')%>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="password" name="secret_key" value="<%= v.prometheus.secret_key %>"
-                                        class="form-control" data-tip="请填写Plug 秘钥">
+                                        class="form-control" data-tip="Plug <%= L('Key')%>">
                                 </div>
                             </div>
                         </td>
@@ -117,8 +129,12 @@
                 <tfoot>
                     <tr>
                         <td><input type="text" name="id" value="prometheus" class="form-control hide"></td>
-                        <td><button type="submit" class="btn btn-success btn-embossed">确定</button>
-                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                        <td><button type="submit" class="btn btn-success btn-embossed">
+                                <%= L('Confirm')%>
+                            </button>
+                            <button type="reset" class="btn btn-default btn-embossed">
+                                <%= L('Reset')%>
+                            </button>
                         </td>
                     </tr>
                 </tfoot>
@@ -134,12 +150,14 @@
             <table class="table table-striped">
                 <tbody>
                     <tr>
-                        <td>服务地址</td>
+                        <td>
+                            <%= L('Address')%>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" name="address" value="<%= v.alertmanager.address %>"
-                                        class="form-control" data-tip="请填写服务地址" data-rule="required">
+                                        class="form-control" data-tip="<%= L('Address')%>" data-rule="required">
                                 </div>
                             </div>
                         </td>
@@ -150,7 +168,7 @@
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" name="basic_user" value="<%= v.alertmanager.basic_user %>"
-                                        class="form-control" data-tip="请填写Basic User">
+                                        class="form-control" data-tip="Basic User">
                                 </div>
                             </div>
                         </td>
@@ -163,29 +181,31 @@
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="password" name="basic_password"
                                         value="<%= v.alertmanager.basic_password %>" class="form-control"
-                                        data-tip="请填写Basic Password">
+                                        data-tip="Basic Password">
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>Plug 地址</td>
+                        <td>Plug <%= L('Address')%>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" name="plug" value="<%= v.alertmanager.plug %>"
-                                        class="form-control" data-tip="请填写Plug 地址">
+                                        class="form-control" data-tip="Plug <%= L('Address')%>">
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>Plug 秘钥</td>
+                        <td>Plug <%= L('Key')%>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="password" name="secret_key" value="<%= v.alertmanager.secret_key %>"
-                                        class="form-control" data-tip="请填写Plug 秘钥">
+                                        class="form-control" data-tip="Plug <%= L('Key')%>">
                                 </div>
                             </div>
                         </td>
@@ -195,8 +215,12 @@
                     <tr>
                         <td><input type="text" name="id" value="alertmanager" class="form-control hide"></td>
                         <td>
-                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
-                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                            <button type="submit" class="btn btn-success btn-embossed">
+                                <%= L('Confirm')%>
+                            </button>
+                            <button type="reset" class="btn btn-default btn-embossed">
+                                <%= L('Reset')%>
+                            </button>
                         </td>
                     </tr>
                 </tfoot>
@@ -212,28 +236,40 @@
             <table class="table table-striped">
                 <tbody>
                     <tr>
-                        <td>服务地址</td>
+                        <td>
+                            <%= L('Address')%>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" name="address" value="<%= v.grafana.address %>"
-                                        class="form-control" data-tip="请填写服务地址" data-rule="required">
+                                        class="form-control" data-tip="<%= L('Address')%>" data-rule="required">
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>快捷链接</td>
+                        <td>
+                            <%= L('Link')%>
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-8 col-xs-12">
                                     <select name="link" class="form-control" data-tip="请填写快捷链接">
                                         <% if (v.grafana.link=="true" ){ %>
-                                            <option value="true" selected>开启</option>
-                                            <option value="false">关闭</option>
+                                            <option value="true" selected>
+                                                <%= L('Open')%>
+                                            </option>
+                                            <option value="false">
+                                                <%= L('Close')%>
+                                            </option>
                                             <% }else{ %>
-                                                <option value="false" selected>关闭</option>
-                                                <option value="true">开启</option>
+                                                <option value="false" selected>
+                                                    <%= L('Close')%>
+                                                </option>
+                                                <option value="true">
+                                                    <%= L('Open')%>
+                                                </option>
                                                 <% }; %>
                                     </select>
                                 </div>
@@ -245,8 +281,12 @@
                     <tr>
                         <td><input type="text" name="id" value="grafana" class="form-control hide">
                         </td>
-                        <td><button type="submit" class="btn btn-success btn-embossed">确定</button>
-                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                        <td><button type="submit" class="btn btn-success btn-embossed">
+                                <%= L('Confirm')%>
+                            </button>
+                            <button type="reset" class="btn btn-default btn-embossed">
+                                <%= L('Reset')%>
+                            </button>
                         </td>
                     </tr>
                 </tfoot>

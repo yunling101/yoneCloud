@@ -22,11 +22,6 @@ var Controller = {
         "del": "delete_task_timer"
     },
     index: function () {
-        // 初始化表格参数配置
-        // jQuery.getScript("/public/static/js/codemirror/codemirror.js");
-        // jQuery.getScript("/public/static/js/codemirror/mode/shell.js");
-        // $("<link>", {rel: 'stylesheet',type: 'text/css',href: '/public/static/js/codemirror/codemirror.css'}).appendTo('head');
-
         if (!Fast.permission(Controller.config.add)) {
             $("#toolbar .btn-add").remove();
         }
@@ -43,8 +38,6 @@ var Controller = {
             callback: {
                 add: function () {
                     return function () {
-                        //    Controller.api.initScriptText("");
-
                         $("#authTree").jstree("destroy");
                         Fast.api.ajax({ "url": "/resources/hosts/batch/", "dataType": "json" }, function (data) {
                             if (data.code) {
@@ -86,7 +79,6 @@ var Controller = {
                             }
                         }
 
-                        //   Controller.api.initScriptText(rows.scripts);
                         $("#authTree").jstree("destroy");
                         Fast.api.ajax({ "url": "/resources/hosts/batch/", "dataType": "json" }, function (data) {
                             if (data.code) {
@@ -133,10 +125,9 @@ var Controller = {
                     { field: 'id', title: 'ID' },
                     { field: 'name', title: L('Name'), align: 'left' },
                     { field: 'uuid', title: L('UUID'), align: 'left' },
-                    // {field: 'username', title: L('Username')},
                     { field: 'timer_type', title: L('Timer type'), formatter: Controller.api.formatter.timerType },
                     { field: 'status', title: L('Status'), formatter: Controller.api.formatter.status },
-                    { field: 'results', title: "执行" + L('Status'), formatter: Controller.api.formatter.results },
+                    { field: 'results', title: L('Result'), formatter: Controller.api.formatter.results },
                     { field: 'execution_time', title: L('Timer time') },
                     { field: 'create_time', title: L('Create time'), formatter: Table.api.formatter.datetime },
                     {
@@ -145,7 +136,7 @@ var Controller = {
                         table: table,
                         buttons: [{
                             name: 'detail',
-                            text: "执行结果",
+                            text: L('Result'),
                             icon: '',
                             classname: 'btn btn-info btn-xs btn-detail btn-dialog',
                             callback: Controller.api.detail,
@@ -165,35 +156,30 @@ var Controller = {
         formatter: {
             timerType: function (value) {
                 if (value == "once") {
-                    return "一次性"
+                    return L('Once')
                 }
-                return "周期性"
+                return L('Period')
             },
             status: function (value) {
                 if (value == 0) {
-                    return '<span class="label label-warning">停止</span>'
+                    return '<span class="label label-warning">' + L('Stop') + '</span>'
                 }
-                return '<span class="label label-info">正常</span>'
+                return '<span class="label label-info">' + L('Normal') + '</span>'
             },
             results: function (value) {
                 if (value == 0) {
-                    return "<span class='text-muted'>未执行</span>"
+                    return "<span class='text-muted'>" + L('Not Executed') + "</span>"
                 }
-                return "<span class='text-success'>已执行</span>"
+                return "<span class='text-success'>" + L('Executed') + "</span>"
             }
         },
         initScriptText: function (data) {
             var textArea = document.getElementById("scripts");
             var editor = CodeMirror.fromTextArea(textArea, {
                 mode: "shell",
-                lineNumbers: true,  //显示行号
-                //    lineWrapping: false, //代码折叠
-                //    foldGutter: true,
-                //    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-                //                matchBrackets: true, //括号匹配
+                lineNumbers: true,
                 autoRefresh: true
             });
-            // editor.setValue(data)
             editor.refresh();
         },
         initHostsTree: function (data) {
@@ -246,8 +232,8 @@ var Controller = {
                                     // tr += "<tr><td>执行主机</td><td>"+ hosts +"</td></tr>";    
                                 } else if (k == "results") {
                                     tr += "<tr><td>" + L(k.replace("_", " ")) + "</td><td><pre style=\"max-height: 200px;overflow-y: auto\">" + data.msg[k] + "</pre></td></tr>";
-                                } else if (k == "frequency") {
-                                    tr += "<tr><td>执行" + L(k.replace("_", " ")) + "</td><td>" + data.msg[k] + " 次</td></tr>";
+                                    // } else if (k == "frequency") {
+                                    //     tr += "<tr><td>执行" + L(k.replace("_", " ")) + "</td><td>" + data.msg[k] + " 次</td></tr>";
                                 } else {
                                     tr += "<tr><td>" + L(k.replace("_", " ")) + "</td><td>" + data.msg[k] + "</td></tr>";
                                 }

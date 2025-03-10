@@ -8,15 +8,21 @@ from webserver.SystemManage.models import Config
 from webserver.UserManage.permissions import query_user_menu
 
 
+def get_title(row, is_english):
+    if is_english:
+        return row["entitle"]
+    return row["title"]
+
+
 # 导航菜单
-def load_navigation_memu(request):
+def load_navigation_memu(request, is_english):
     info = {"code": False, "msg": "", "rows": [], "total": ""}
     if request.user.is_superuser:
         menu_lists = serialize('json', Rule.objects.filter(pid=0).order_by("weigh"))
         for line in api.Api.json_load(menu_lists):
             sd = line["fields"]
             if sd["status"]:
-                sd["title"] = sd["title"].strip("&nbsp;├ ")
+                sd["title"] = get_title(sd, is_english) #.strip("&nbsp;├ ")
                 href = sd["name"].split("/")
                 if len(href) == 1:
                     sd["id"] = sd["name"]
@@ -31,7 +37,7 @@ def load_navigation_memu(request):
                     for ss in api.Api.json_load(sub):
                         sk = ss["fields"]
                         if sk["status"]:
-                            sk["title"] = sk["title"].strip("&nbsp;├ ")
+                            sk["title"] = get_title(sk, is_english) #.strip("&nbsp;├ ")
                             hrefs = sk["name"].split("/")
                             if len(hrefs) == 1:
                                 sk["id"] = sk["name"]
@@ -44,7 +50,7 @@ def load_navigation_memu(request):
                                 for sjj in api.Api.json_load(san):
                                     sj = sjj["fields"]
                                     if sj["status"]:
-                                        sj["title"] = sj["title"].strip("&nbsp;├ ")
+                                        sj["title"] = get_title(sj, is_english) #.strip("&nbsp;├ ")
                                         href_sj = sj["name"].split("/")
                                         if len(href_sj) == 1:
                                             sj["id"] = sj["name"]
@@ -104,6 +110,11 @@ def load_navigation_memu(request):
                         else:
                             tmp_group[sd["title"]] = sd
             for k, v in tmp_group.items():
+                if is_english:
+                    v["title"] = v["entitle"]
+                    if v.get("sub") is not None and len(v["sub"]) != 0:
+                        for idx, x in enumerate(v["sub"]):
+                            v["sub"][idx]["title"] = x["entitle"]
                 info["rows"].append(v)
         else:
             api.logger.error("{0}".format(perm.get("msg")))

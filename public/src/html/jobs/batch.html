@@ -1,23 +1,32 @@
 <div class="alert alert-danger alert-dismissable">
     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
     <strong>
-        <h3>风险提示: </h3>
-    </strong> 批量命令将以主机绑定的凭证用户执行命令并记录执行日志，请谨慎使用命令！
+        <h3>
+            <%= L('Risk Warning')%>:
+        </h3>
+    </strong>
+    <%= L('The batch command will execute the command and record the execution log as the credential user bound to the host. Please use the command with caution!')%>
 </div>
 <div class="row">
     <div class="col-lg-3">
         <div class="ibox ">
             <div class="ibox-title">
-                <h5>主机列表</h5>
+                <h5>
+                    <%= L('Hosts')%>
+                </h5>
             </div>
             <div class="ibox-content">
                 <span class="text-muted" style="margin-left:8px;">
                     <input type="checkbox" id="checkall">
-                    <label for="checkall"><small>选择全部</small></label>
+                    <label for="checkall"><small>
+                            <%= L('Choose')%>
+                        </small></label>
                 </span>
                 <span class="text-muted">
                     <input type="checkbox" id="expandall">
-                    <label for="expandall"><small>展开所有</small></label>
+                    <label for="expandall"><small>
+                            <%= L('Expand')%>
+                        </small></label>
                 </span>
                 <div id="assetTree" class="ztree"></div>
                 <div class="clearfix"></div>
@@ -35,14 +44,20 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <textarea class="form-control" name="command" placeholder="请输入要批量执行的命令" rows="4"></textarea>
+                        <textarea class="form-control" name="command"
+                            placeholder="<%=L('Please enter the command to be executed in batches')%>"
+                            rows="4"></textarea>
                     </div>
                     <div class="col-lg-6">
                         <div style="margin-top: 10px;margin-bottom: 20px;">
                             <!-- <select class="form-control" name="ssh_user" id="ssh_user"></select> -->
                         </div>
-                        <button class="btn btn-primary" name="submit">执行</button>
-                        <button class="btn btn-default" name="clear">清屏</button>
+                        <button class="btn btn-primary" name="submit">
+                            <%= L('Run')%>
+                        </button>
+                        <button class="btn btn-default" name="clear">
+                            <%= L('Clear')%>
+                        </button>
                     </div>
                 </div>
             </div>

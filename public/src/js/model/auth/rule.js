@@ -74,6 +74,7 @@ var Controller = {
                     { field: 'state', checkbox: true, },
                     { field: 'id', title: 'ID' },
                     { field: 'title', title: L('Title'), align: 'left', formatter: Controller.api.formatter.title },
+                    { field: 'entitle', title: L('EnTitle'), align: 'left' },
                     { field: 'icon', title: L('Icon'), formatter: Controller.api.formatter.icon },
                     { field: 'name', title: L('Name'), align: 'left', formatter: Controller.api.formatter.name },
                     { field: 'weigh', title: L('Weigh') },

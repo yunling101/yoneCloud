@@ -2,25 +2,31 @@
     <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST"
         action="/alarm/application/add/">
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">应用名称:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Name')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="name" placeholder="应用名称" data-rule="required" />
+                <input type="text" class="form-control" name="name" placeholder="<%= L('Name')%>"
+                    data-rule="required" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">应用地址:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Address')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <small class="text-muted"><i class="fa fa-info-circle"></i> 需保证应用端口正常, 且使用如:
-                    http://127.0.0.1:8080/metrics 地址能拉取到监控数据.</small>
-                <input type="text" class="form-control" name="address" placeholder="应用地址, 格式:127.0.0.1:8080"
-                    data-rule="required" />
+                <small class="text-muted"><i class="fa fa-info-circle"></i>e.g：http://127.0.0.1:8080/metrics</small>
+                <input type="text" class="form-control" name="address"
+                    placeholder="<%= L('Address')%>, <%= L('Format')%>:127.0.0.1:8080" data-rule="required" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">备注信息:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Comment')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <textarea class="form-control" name="comment" placeholder="备注信息"></textarea>
+                <textarea class="form-control" name="comment" placeholder="<%= L('Comment')%>"></textarea>
             </div>
         </div>
 
@@ -28,8 +34,12 @@
         <div class="form-group layer-footer">
             <div class="col-xs-2"></div>
             <div class="col-xs-12 col-sm-8">
-                <button type="submit" class="btn btn-success btn-embossed">确认</button>
-                <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                <button type="submit" class="btn btn-success btn-embossed">
+                    <%= L('Confirm')%>
+                </button>
+                <button type="reset" class="btn btn-default btn-embossed">
+                    <%= L('Reset')%>
+                </button>
             </div>
         </div>
     </form>

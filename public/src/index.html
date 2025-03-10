@@ -33,7 +33,7 @@
                         <div class="logo-element">Yone</div>
                     </li>
 
-                    <li class="nav-li-label">导航</li>
+                    <li class="nav-li-label">{{lang.menu}}</li>
                     {% for m in menu %}
                     <li id="{{ m.id }}">
                         {% if m.name == 'dashboard' %}
@@ -80,13 +80,13 @@
                     </li>
                     {% endfor %}
                     {% if monitor.status %}
-                    <li class="nav-li-label">扩展</li>
+                    <li class="nav-li-label">{{lang.extension}}</li>
                     {% endif %}
                     {% if monitor.status %}
                     <li id="monitor">
                         <a href="{{ monitor.url }}" target="_blank">
                             <i class="fa fa-link cadetblue"></i>
-                            <span>监控可视化</span>
+                            <span>{{lang.visualization}}</span>
                         </a>
                     </li>
                     {% endif %}
@@ -114,7 +114,7 @@
                                 <li>
                                     <a href="javascript:;" hunt-href="/event/lists" class="dropdown-item">
                                         <div>
-                                            <i class="fa fa-envelope fa-fw"></i> 您有{{event.count}}条消息未查看
+                                            <i class="fa fa-envelope fa-fw"></i> {{lang.message}}
                                             <span class="float-right text-muted small">{{event.time}}</span>
                                         </div>
                                     </a>
@@ -124,7 +124,7 @@
                                 <li>
                                     <div class="text-center link-block">
                                         <a href="javascript:;" hunt-href="/event/lists" class="dropdown-item">
-                                            <strong>查看全部</strong>
+                                            <strong>{{lang.view}}</strong>
                                             <i class="fa fa-angle-right"></i>
                                         </a>
                                     </div>
@@ -134,14 +134,13 @@
 
                         <li>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="text-muted text-xs block">欢迎 {{request.user.username }} 登录<b
-                                        class="caret"></b></span>
+                                <span class="text-muted text-xs block">{{ lang.login }}<b class="caret"></b></span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a class="dropdown-item" href="javascript:;"
-                                        hunt-href="user/change/password">修改密码</a></li>
+                                        hunt-href="user/change/password">{{lang.changepassword}}</a></li>
                                 <li class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="/login_out/">退 出</a></li>
+                                <li><a class="dropdown-item" href="/login_out/">{{lang.logout}}</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -172,6 +171,13 @@
     <script src="/public/static/js/main.min.js"></script>
     <script src="/public/static/js/index.min.js"></script>
     <script src="/public/static/js/player.min.js"></script>
+    {% if language == "english" %}
+    <script src="/public/static/js/locale/en-US.js"></script>
+    <script>localStorage.setItem("language", "en-US")</script>
+    <script src="/public/static/js/locale/bootstrap-select-en_US.js"></script>
+    {% else %}
+    <script>localStorage.setItem("language", "zh-CN")</script>
+    {% endif %}
 </body>
 
 </html>

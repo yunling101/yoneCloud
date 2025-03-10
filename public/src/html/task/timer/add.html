@@ -4,65 +4,93 @@
         <input type="hidden" name="hosts" />
         <input type="hidden" name="business" />
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">任务名称:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Name')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="name" placeholder="名称" data-rule="required;name" />
+                <input type="text" class="form-control" name="name" placeholder="<%= L('Name')%>"
+                    data-rule="required;name" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">任务类型:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Type')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <select class="form-control" name="timer_type" id="timer_type">
-                    <option value="once">一次性</option>
-                    <option value="repeat">周期性</option>
+                    <option value="once">
+                        <%= L('Once')%>
+                    </option>
+                    <option value="repeat">
+                        <%= L('Period')%>
+                    </option>
                 </select>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">执行时间:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Time')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <small class="text-muted"><i class="fa fa-info-circle"></i>
-                    crontab格式, 如: *(分) *(时) *(日) *(月) *(星)
-                    <span style="display: block;">| ——分钟（0 - 59）</span>
-                    <span style="display: block;">| | ——小时（0 - 23）</span>
-                    <span style="display: block;">| | | ——日（1 - 31）</span>
-                    <span style="display: block;">| | | | ——月（1 - 12）</span>
-                    <span style="display: block;">| | | | | ——星期（0 - 7，星期日=0或7）</span>
+                    Crontab <%= L('Format')%> *(<%= L('Minute')%>) *(<%= L('Hour')%>) *(<%= L('Day')%>) *(<%=
+                                        L('Month')%>) *(<%= L('Week')%>)
+                                            <span style="display: block;">| ——<%= L('Minute')%>（0 - 59）</span>
+                                            <span style="display: block;">| | ——<%= L('Hour')%>（0 - 23）</span>
+                                            <span style="display: block;">| | | ——<%= L('Day')%>（1 - 31）</span>
+                                            <span style="display: block;">| | | | ——<%= L('Month')%>（1 - 12）</span>
+                                            <span style="display: block;">| | | | | ——<%= L('Week')%>（0 - 7）</span>
                 </small>
-                <input type="text" class="form-control" name="execution_time" placeholder="执行时间" data-rule="required" />
+                <input type="text" class="form-control" name="execution_time" placeholder="<%= L('Execution Time')%>"
+                    data-rule="required" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">Linux命令:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Command')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <small class="text-muted"><i class="fa fa-info-circle"></i> 仅支持一条sh命令（非shell脚本）</small>
+                <small class="text-muted"><i class="fa fa-info-circle"></i>
+                    <%=L('only one sh command is supported (not shell script)')%>）
+                </small>
                 <textarea class="form-control" name="scripts" id="scripts" rows="2"></textarea>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">主机选择:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Hosts')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <div class="text-warning">注意: 选择后树形必须是展开状态，否则无法获取选择项。</div>
+                <div class="text-warning">
+                    <%= L('Note')%>: <%= L('After selection, the tree must be in expanded state, otherwise the selected items cannot be obtained.')%>
+                </div>
                 <span class="text-muted" style="margin-left:8px;">
                     <input type="checkbox" id="checkall">
-                    <label for="checkall"><small>选择全部</small></label>
+                    <label for="checkall"><small>
+                            <%= L('Choose')%>
+                        </small></label>
                 </span>
                 <span class="text-muted">
                     <input type="checkbox" id="expandall">
-                    <label for="expandall"><small>展开所有</small></label>
+                    <label for="expandall"><small>
+                            <%= L('Expand')%>
+                        </small></label>
                 </span>
                 <div id="authTree" class="ztree"></div>
                 <div class="clearfix"></div>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">任务描述:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Description')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <textarea class="form-control" name="description" placeholder="任务描述" rows="3"></textarea>
+                <textarea class="form-control" name="description" placeholder="<%= L('Description')%>"
+                    rows="3"></textarea>
             </div>
         </div>
 
@@ -70,8 +98,12 @@
         <div class="form-group layer-footer">
             <div class="col-xs-2"></div>
             <div class="col-xs-12 col-sm-8">
-                <button type="submit" class="btn btn-success btn-embossed">确认</button>
-                <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                <button type="submit" class="btn btn-success btn-embossed">
+                    <%= L('Confirm')%>
+                </button>
+                <button type="reset" class="btn btn-default btn-embossed">
+                    <%= L('Reset')%>
+                </button>
             </div>
         </div>
     </form>

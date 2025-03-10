@@ -6,15 +6,7 @@ var Controller = {
          if (data.code) {
             $("#indexHosts").text(data.msg.hosts);
             $("#indexBusiness").text(data.msg.business);
-            $("#weekDate").text(" 最近更新时间 " + data.msg.time);
-            //              $("#indexEvent").text(data.event.count);
-            //              for (var i=0;i<data.event.data.length;i++){
-            //                   var v = data.event.data[i];
-            //                   var li = '<li class="list-group-item"><a href="#/event/lists">'+ v.title +'</a>';
-            //                   li += '<small class="block text-muted"><i class="fa fa-clock-o"></i> '+ moment(new Date(v.time)).format('YYYY-MM-DD hh:mm:ss') +'</small>';
-            //                   li += '</li>';
-            //                   $("#EventList").append(li);
-            //              }
+            $("#weekDate").text(" " + L('Last updated') + " " + data.msg.time);
          } else {
             Toastr.error(data.msg);
             return false;
@@ -45,13 +37,13 @@ var Controller = {
                div += '<div class="row">';
                div += '<div class="col-lg-3 date">';
                div += '<i class="fa fa-briefcase"></i>';
-               div += moment(new Date(v.date_added)).format('YYYY年MM月DD日');
+               div += moment(new Date(v.date_added)).format(L('YYYY-MM-DD'));
                div += '<br/>';
                div += '<small class="text-navy">' + moment(new Date(v.date_added)).format('hh:mm:ss') + '</small>';
                div += '</div>';
                div += '<div class="col-lg-7 content no-top-border">';
                div += '<p class="m-b-xs"><strong>' + v.username + '</strong></p>';
-               div += '<p>' + v.object + '; <br/>【操作IP】' + v.ip + '</p>';
+               div += '<p>' + v.object + '; <br/>【' + L('Operate') + ' IP】' + v.ip + '</p>';
                div += '</div>';
                div += '</div>';
                div += '</div>';

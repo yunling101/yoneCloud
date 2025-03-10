@@ -142,6 +142,21 @@ gulp.task('player_js', function () {
       .pipe(gulp.dest("./public/dist/js/"))
 })
 
+gulp.task('copy_locale_select', function () {
+   return gulp.src("./public/src/js/lib/locale/bootstrap-select-en_US.js")
+      .pipe(gulp.dest("./public/dist/js/locale/"))
+})
+
+gulp.task('copy_locale_table', function () {
+   return gulp.src("./public/src/js/lib/locale/bootstrap-table-en-US.js")
+      .pipe(gulp.dest("./public/dist/js/locale/"))
+})
+
+gulp.task('copy_locale', function () {
+   return gulp.src("./public/src/js/lib/locale/en-US.js")
+      .pipe(gulp.dest("./public/dist/js/locale/"))
+})
+
 gulp.task('html', function () {
    return gulp.src("./public/src/*.html")
       .pipe(htmlmin({ removeEmptyAttributes: true, collapseWhitespace: true }))
@@ -178,5 +193,7 @@ exports.default = gulp.series('clean',
       'html',
       'copy_css_images',
       'copy_lib_duallistbox',
-      'copy_lib_theme'
+      'copy_lib_theme',
+      'copy_locale_select',
+      'copy_locale',
    ))

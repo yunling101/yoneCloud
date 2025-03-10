@@ -3,17 +3,26 @@
         <div class="ibox ">
             <div class="ibox-content">
                 <div id="toolbar" class="toolbar">
-                    <a href="javascript:;" class="btn btn-primary btn-refresh" title="刷新"><i
+                    <a href="javascript:;" class="btn btn-primary btn-refresh" title="<%= L('refresh')%>"><i
                             class="fa fa-refresh"></i></a>
                     <a class="btn btn-info btn-multi btn-disabled disabled" href="javascript:;"
                         data-url="/system/recycle/restore/" data-action="restore"><i class="fa fa-rotate-left"></i>
-                        还原</a>
-                    <a class="btn btn-danger btn-multi btn-disabled disabled" href="javascript:;"
-                        data-url="/system/recycle/delete/" data-action="destroy"><i class="fa fa-times"></i> 销毁</a>
-                    <a class="btn btn-success btn-restoreall" href="/system/recycle/restore/" title="还原全部"><i
-                            class="fa fa-rotate-left"></i> 还原全部</a>
-                    <a href="/system/recycle/destroy/" class="btn btn-danger btn-destroyall" title="清空回收站"><i
-                            class="fa fa-times"></i> 清空回收站</a>
+                        <%= L('Restore')%>
+                    </a>
+                    <a class="btn btn-danger btn-multi btn-disabled disabled" style="margin-left: 4px;"
+                        href="javascript:;" data-url="/system/recycle/delete/" data-action="destroy"><i
+                            class="fa fa-times"></i>
+                        <%= L('Destroy')%>
+                    </a>
+                    <a class="btn btn-success btn-restoreall" style="margin-left: 4px;" href="/system/recycle/restore/"
+                        title="<%= L('Restore')%> <%= L('All')%>"><i class="fa fa-rotate-left"></i>
+                        <%= L('Restore')%>
+                            <%= L('All')%>
+                    </a>
+                    <a href="/system/recycle/destroy/" class="btn btn-danger btn-destroyall" style="margin-left: 4px;"
+                        title="<%=L('Empty the Recycle Bin')%>"><i class="fa fa-times"></i>
+                        <%=L('Empty the Recycle Bin')%>
+                    </a>
                 </div>
                 <table id="table" class="table table-bordered table-hover" width="100%"></table>
             </div>

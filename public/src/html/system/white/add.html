@@ -1,25 +1,33 @@
 <div class="content">
-    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="/white/add/">
+    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST"
+        action="/white/add/">
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">IP地址:</label>
+            <label class="control-label col-xs-12 col-sm-2">IP <%= L('Address')%>:</label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="address" placeholder="IP地址" data-rule="required;address"/>
+                <input type="text" class="form-control" name="address" placeholder="IP <%= L('Address')%>"
+                    data-rule="required;address" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">备注:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Comment')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <textarea class="form-control" name="comment" placeholder="备注信息"></textarea>
+                <textarea class="form-control" name="comment" placeholder="<%= L('Comment')%>"></textarea>
             </div>
         </div>
 
-        <input type="text" class="form-control hide" name="id"/>
+        <input type="text" class="form-control hide" name="id" />
         <div class="form-group layer-footer">
             <div class="col-xs-2"></div>
             <div class="col-xs-12 col-sm-8">
-                <button type="submit" class="btn btn-success btn-embossed">确认</button>
-                <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                <button type="submit" class="btn btn-success btn-embossed">
+                    <%= L('Confirm')%>
+                </button>
+                <button type="reset" class="btn btn-default btn-embossed">
+                    <%= L('Reset')%>
+                </button>
             </div>
         </div>
     </form>

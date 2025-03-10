@@ -2,7 +2,7 @@ name: ${NAME}
 
 services:
   yonecloud:
-    image: yunling101/yonecloud:${BASE_VERSION}
+    image: yunling101/yonecloud-bilingual:${BASE_VERSION}
     container_name: ${NAME}_yonecloud
     restart: always
     volumes:

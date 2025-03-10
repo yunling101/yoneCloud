@@ -14,7 +14,7 @@ from webserver.SystemManage.models import Config
 
 
 def main():
-    version, version_type = "v0.1.0", "开源版"
+    version, version_type = "v0.1.0", "community"
     current_path = os.path.dirname(os.path.abspath(__file__))
     version_file = os.path.dirname(current_path) + "/VERSION"
     if os.path.exists(version_file):
@@ -23,6 +23,7 @@ def main():
         {"cname": "系统名称", "ename": "name", "value": "YoneCloud"},
         {"cname": "系统Logo", "ename": "logo", "value": "/public/static/img/logo.png"},
         {"cname": "回收站", "ename": "recycle", "value": "0"},
+        {"cname": "系统语言", "ename": "language", "value": "chinese"},
         {"cname": "版本类型", "ename": "auth_type", "value": version_type},
         {"cname": "系统版本", "ename": "version", "value": version},
         {"cname": "系统时区", "ename": "timezone", "value": "Asia/Shanghai"},

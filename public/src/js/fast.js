@@ -71,6 +71,7 @@ var Fast = {
         //打开一个弹出窗口
         open: function (url, title, options) {
             Fast.api.render(url, function (html) {
+                html = ejs.render(html, { L: L })
                 if (options.html != "" && options.html != undefined) {
                     html = L(html, options.html)
                 }
@@ -182,7 +183,7 @@ var Fast = {
         line += '<ol class="breadcrumb">';
         if (app != "dashboard") {
             line += '<li class="breadcrumb-item">';
-            line += '<a href="/">仪表盘</a>';
+            line += '<a href="/">' + L('Dashboard') + '</a>';
             line += '</li>';
             line += '<li class="breadcrumb-item">';
             line += '<a>' + s + '</a>';
@@ -219,7 +220,7 @@ var Fast = {
         Fast.setNavbar(r.path);
         if (r.path.length != 0) {
             Fast.api.render(r.href, function (e) {
-                $(".wrapper-content").html(e);
+                $(".wrapper-content").html(ejs.render(e, { L: L }));
                 jQuery.getScript(Config.model + r.href + ".js").done(function () {
                     Controller.index();
                 });
@@ -325,6 +326,13 @@ var Fast = {
             });
         }
     },
+    get_en: function () {
+        var language = localStorage.getItem("language");
+        if (language && language == "en-US") {
+            return true
+        }
+        return false
+    },
     init: function () {
         // 获取监控权限
         Fast.oAuth()
@@ -375,6 +383,8 @@ window.Toastr = toastr;
 window.L = Fast.lang(Fast.lang_ajax());
 //全局权限
 window.Permission = Fast.query_permission();
+//获取语言
+window.lang_en = Fast.get_en();
 
 //将Fast渲染至全局
 window.Fast = Fast;

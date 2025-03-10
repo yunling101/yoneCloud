@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config.name }}-忘记密码</title>
+    <title>{{ config.name }}-{{lang.name}}</title>
     <link href="/public/static/css/app.min.css" rel="stylesheet">
 </head>
 
@@ -13,21 +13,23 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="ibox-content">
-                    <h2 class="font-bold">忘记（重置）密码</h2>
-                    <p>输入您的邮箱地址,您的密码将被重置并通过邮件发送给您.</p>
+                    <h2 class="font-bold">{{lang.name}}</h2>
+                    <!-- <p>输入您的邮箱地址,您的密码将被重置并通过邮件发送给您.</p> -->
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="m-t">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" name="email" placeholder="输入邮箱地址">
+                                    <input type="email" class="form-control" name="email"
+                                        placeholder="{{lang.email|capfirst}}">
                                 </div>
                                 <div class="form-group hide" id="codeDiv">
-                                    <input type="text" class="form-control" name="code" placeholder="输入验证码">
+                                    <input type="text" class="form-control" name="code" placeholder="{{lang.code}}">
                                 </div>
                                 <span id="errorInfo" style="display:none"></span>
                                 <button type="submit" id="sendPassword"
-                                    class="btn btn-primary block full-width m-b">获取验证码</button>
-                                <a href="/login/">登 录</a>
+                                    class="btn btn-primary block full-width m-b">{{lang.get|capfirst}}
+                                    {{lang.code|capfirst}}</button>
+                                <a href="/login/">{{lang.login|capfirst}}</a>
                             </div>
                         </div>
                     </div>

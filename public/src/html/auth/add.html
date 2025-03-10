@@ -2,74 +2,113 @@
     <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST"
         action="/auth/add/">
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">菜单:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Menu')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <div class="radio">
-                    <label><input checked="checked" name="ismenu" type="radio" value=1> 是</label>
-                    <label><input name="ismenu" type="radio" value=0> 否</label>
+                    <label><input checked="checked" name="ismenu" type="radio" value=1>
+                        <%= L('True')%>
+                    </label>
+                    <label><input name="ismenu" type="radio" value=0>
+                        <%= L('False')%>
+                    </label>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">父级:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Parent')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <select class="form-control" id="pid" name="pid">
-                    <option value="0">无</option>
+                    <option value="0">
+                        <%= L('None')%>
+                    </option>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">规则:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Rule')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="name" placeholder="父级菜单无需匹配控制器和方法,子级菜单请使用控制器名"
-                    data-rule="required;name" />
+                <input type="text" class="form-control" name="name" data-rule="required;name" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">标题:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Title')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <input type="text" class="form-control" name="title" data-rule="required;title" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">图标:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Alias')%>:
+            </label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" class="form-control" name="entitle" data-rule="required;entitle" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Icon')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <div class="input-group input-groupp-md">
                     <input type="text" class="form-control" name="icon" value="fa fa-circle-o" />
-                    <a href="javascript:;" class="btn-search-icon input-group-addon">搜索图标</a>
+                    <a href="javascript:;" class="btn-search-icon input-group-addon">
+                        <%= L('Search')%>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">权重:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Weigh')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <input type="text" class="form-control" name="weigh" value="0" data-rule="required" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">优先级:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Priority')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <input type="text" class="form-control" name="priority" value="0" data-rule="required" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">规则条件:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Condition')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <textarea class="form-control" name="condition"></textarea>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">备注:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Comment')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <textarea class="form-control" name="remark"></textarea>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">状态:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Status')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
                 <div class="radio">
-                    <label><input checked="checked" name="status" type="radio" value=1> 正常</label>
-                    <label><input name="status" type="radio" value=0> 隐藏</label>
+                    <label><input checked="checked" name="status" type="radio" value=1>
+                        <%= L('Normal')%>
+                    </label>
+                    <label><input name="status" type="radio" value=0>
+                        <%= L('Hide')%>
+                    </label>
                 </div>
             </div>
         </div>
@@ -78,8 +117,12 @@
         <div class="form-group layer-footer">
             <div class="col-xs-2"></div>
             <div class="col-xs-12 col-sm-8">
-                <button type="submit" class="btn btn-success btn-embossed">确认</button>
-                <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                <button type="submit" class="btn btn-success btn-embossed">
+                    <%= L('Confirm')%>
+                </button>
+                <button type="reset" class="btn btn-default btn-embossed">
+                    <%= L('Reset')%>
+                </button>
             </div>
         </div>
     </form>

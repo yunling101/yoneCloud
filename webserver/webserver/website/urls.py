@@ -10,7 +10,7 @@ urlpatterns = [
     url(r"^login/$", views.Login.as_view(), name="login"),
     url(r"^forgot/code/$", views.ForgotCode.as_view()),
     url(r"^forgot/password/$", views.ForgotPassword.as_view()),
-    url(r"^lang", views.LangZh.as_view()),
+    url(r"^lang", views.Language.as_view()),
     url(r"^permission/$", views.UserPermission.as_view()),
     url(r'^ssh/([0-9]+)/$', views.SSHConnect.as_view(), name="ssh"), # ([0-9]{10})
 

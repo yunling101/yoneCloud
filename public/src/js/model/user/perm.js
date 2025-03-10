@@ -11,23 +11,23 @@ var Controller = {
                 "form": true
             },
             callback: {
-                add: function() {
-                   return function(){
-                   }
+                add: function () {
+                    return function () {
+                    }
                 },
-                edit: function(rows) {
-                   return function() {
-                       for(var k in rows) {
-                          if (k == "comment") {
-                              $("textarea[name='comment']").text(rows[k]);
-                          }else{
-                              var node = $("input[name='"+ k +"']");
-                              if (node.length == 1){
-                                  node.val(rows[k]);
-                              }
-                          }
-                       }
-                   }
+                edit: function (rows) {
+                    return function () {
+                        for (var k in rows) {
+                            if (k == "comment") {
+                                $("textarea[name='comment']").text(rows[k]);
+                            } else {
+                                var node = $("input[name='" + k + "']");
+                                if (node.length == 1) {
+                                    node.val(rows[k]);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -39,12 +39,12 @@ var Controller = {
             escape: false,
             columns: [
                 [
-                    {field: 'state', checkbox: true,},
-                    {field: 'id', title: 'ID'},
-                    {field: 'name', title: L('Name'), align: 'left'},
-                    {field: 'menu', title: L('Menu'), align: 'left'},
-                    {field: 'view', title: L('View'), align: 'left'},
-                    {field: 'comment', title: L('comment'), align: 'left'},
+                    { field: 'state', checkbox: true, },
+                    { field: 'id', title: 'ID' },
+                    { field: 'name', title: L('Name'), align: 'left' },
+                    { field: 'menu', title: L('Menu'), align: 'left' },
+                    { field: 'view', title: L('View'), align: 'left' },
+                    { field: 'comment', title: L('comment'), align: 'left' },
                     {
                         field: 'operate',
                         title: L('Operate'),
@@ -65,12 +65,12 @@ var Controller = {
         bindevent: function () {
             var iconlist = [];
             var iconfunc = function () {
-                Fast.api.render("auth/tpl", function(e){
-                   Layer.open({
+                Fast.api.render("auth/tpl", function (e) {
+                    Layer.open({
                         type: 1,
                         area: ['700px', '400px'], //宽高
                         zIndex: Layer.zIndex,
-                        content: ejs.render(e, {iconlist:iconlist})
+                        content: ejs.render(e, { iconlist: iconlist })
                     });
                 })
             };

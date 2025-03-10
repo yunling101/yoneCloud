@@ -12,5 +12,5 @@ dev-ssh:
 
 docker-build:
 	@bash config-generate.sh docker
-	@docker build -f Dockerfile -t yunling101/yonecloud:${VERSION} .
+	@docker build -f Dockerfile -t yunling101/yonecloud-bilingual:${VERSION} .
 	@bash config-generate.sh docker-rm

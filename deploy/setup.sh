@@ -179,7 +179,7 @@ usage()
 Usage: $0 <OPTION> SERVICE
 Option:
 init | list | deploy<service> | start<service> | restart<service> | stop<service>
-up<service> | down<service> | re-down<server> | ps | top | clean<service> | re-clean<service> | down-clean
+up<service> | down<service> | re-down<service> | ps | top | clean<service> | re-clean<service> | down-clean
 
 Service:
 all<default> | mysql | prometheus | alertmanager | yonecloud | ...

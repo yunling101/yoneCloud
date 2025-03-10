@@ -40,10 +40,10 @@ var Controller = {
                 [
                     { field: 'state', checkbox: true },
                     { field: 'name', title: L('Name') },
-                    { field: 'group_by', title: "报警分组" },
-                    { field: 'group_wait', title: "等待时间" },
-                    { field: 'group_interval', title: "间隔时间" },
-                    { field: 'repeat_interval', title: "重复时间" },
+                    { field: 'group_by', title: L('Group') },
+                    { field: 'group_wait', title: L('Wait') },
+                    { field: 'group_interval', title: L('Interval') },
+                    { field: 'repeat_interval', title: L('Repeat') },
                     {
                         field: 'operate',
                         title: L('Operate'),
@@ -94,11 +94,11 @@ var Controller = {
         getSelect: function (name, value) {
             var label = '<label class="col-form-label">' + name + '</label>';
             var select = '<select name="' + name + '" class="form-control form-control-lg m-b">';
-            select += '<option value="0">关闭</option>'
+            select += '<option value="0">' + L('Close') + '</option>'
             if (value == "1") {
-                select += '<option value="1" selected="selected">开启</option>'
+                select += '<option value="1" selected="selected">' + L('Open') + '</option>'
             } else {
-                select += '<option value="1">开启</option>'
+                select += '<option value="1">' + L('Open') + '</option>'
             }
             select += "</select>";
             return label + select;
@@ -111,7 +111,7 @@ var Controller = {
             a.setAttribute("href", "javascript:void(0)");
             a.setAttribute("parent", idx);
             a.setAttribute("index", index);
-            a.textContent = "删除";
+            a.textContent = L('Delete');
             a.onclick = function () {
                 $(this).parent().remove();
                 var i = $(this).attr("index");
@@ -232,7 +232,7 @@ var Controller = {
                 "data": JSON.stringify(data)
             }, function (res) {
                 if (res.code) {
-                    Toastr.success("操作成功");
+                    Toastr.success(L('Operation Completed'));
                     return true
                 } else {
                     Toastr.error(res.msg);
@@ -246,15 +246,20 @@ var Controller = {
                     $("#globalTabContent").html("");
                     for (var i in data.rows) {
                         var rows = data.rows[i];
+                        var name = rows.cname;
+                        if (lang_en) {
+                            name = rows.ename.charAt(0).toUpperCase() + rows.ename.slice(1);
+                        }
                         if (i == 0) {
-                            $("ul.nav.nav-global").append('<li><a class="nav-link active" href="#' + rows.ename + '" data-toggle="tab">' + rows.cname + '</a></li>');
+                            $("ul.nav.nav-global").append('<li><a class="nav-link active" href="#' + rows.ename + '" data-toggle="tab">' + name + '</a></li>');
                         } else {
-                            $("ul.nav.nav-global").append('<li><a class="nav-link" href="#' + rows.ename + '" data-toggle="tab">' + rows.cname + '</a></li>');
+                            $("ul.nav.nav-global").append('<li><a class="nav-link" href="#' + rows.ename + '" data-toggle="tab">' + name + '</a></li>');
                         }
                         Fast.api.render("alarm/configGlobalLine", function (html) {
                             $("#globalTabContent").append(ejs.render(html, {
                                 name: rows.ename,
                                 config: rows.config,
+                                lang_en: lang_en
                             }));
                         });
                     }

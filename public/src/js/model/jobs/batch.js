@@ -53,18 +53,18 @@ var Controller = {
             }
         });
         term.open(document.getElementById("tabContent"));
-        term.write("\r\n请输入要批量执行的命令!")
+        term.write("\r\n" + L('Please enter the command to be executed in batches') + "!")
 
         $(document).on("click", "button[name=submit]", function () {
             var user = $("#ssh_user").val();
             var command = $("textarea[name=command]").val();
             if (command.length == 0) {
-                Toastr.warning("命令不能为空!");
+                Toastr.warning(L("Command") + L("cannot be empty") + "!");
                 return false;
             }
             var r = $("#assetTree").jstree("get_all_checked");
             if (r.hosts.length == 0 && r.business.length == 0) {
-                Toastr.warning("请至少选择1台主机!");
+                Toastr.warning(L('Please select at least 1 host') + "!");
                 return false;
             }
 
@@ -96,7 +96,7 @@ var Controller = {
 
         $(document).on("click", "button[name=clear]", function () {
             term.reset();
-            term.write("\r\n请输入要批量执行的命令!")
+            term.write("\r\n" + L('Please enter the command to be executed in batches') + "!")
         });
     },
     api: {

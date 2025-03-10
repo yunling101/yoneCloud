@@ -43,8 +43,8 @@ var Controller = {
                 [
                     { field: 'state', checkbox: true },
                     { field: 'sid', title: L('Sid'), align: 'left' },
-                    { field: 'name', title: "应用" + L('Name'), align: 'left' },
-                    { field: 'address', title: "应用地址", align: 'left' },
+                    { field: 'name', title: L('Name'), align: 'left' },
+                    { field: 'address', title: L('Address'), align: 'left' },
                     {
                         field: 'operate',
                         title: L('Operate'),

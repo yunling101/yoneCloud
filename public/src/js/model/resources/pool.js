@@ -99,13 +99,13 @@ var Controller = {
                     { field: 'state', checkbox: true, },
                     { field: 'sid', title: 'ID', formatter: Controller.api.formatter.id },
                     // {field: 'instance_id', title: L('Instance id'), align: 'left'},
-                    { field: 'hostname', title: L('Hostname') + "称", align: 'left' },
+                    { field: 'hostname', title: L('Hostname'), align: 'left' },
                     { field: 'ip', title: L('Address'), align: 'left' },
                     // {field: 'business', title: L('Business'), searchList: Controller.config.business},
                     { field: 'provider', title: L('Provider'), searchList: Controller.config.provider },
-                    { field: 'monitor', title: L('Monitor') + "状态", formatter: Controller.api.formatter.monitor, searchList: ["开启", "关闭"] },
+                    { field: 'monitor', title: L('Monitor'), formatter: Controller.api.formatter.monitor, searchList: [L('Open'), L('Close')] },
                     // {field: 'agent_version', title: L('Agent version')},
-                    { field: 'status', title: L('Status'), formatter: Controller.api.formatter.status, searchList: ["正常", "异常", "未知"] },
+                    { field: 'status', title: L('Status'), formatter: Controller.api.formatter.status, searchList: [L('Normal'), L('Abnormal'), L('Unkown')] },
                     { field: 'create_time', title: L('Create time'), sortable: true, operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime },
                     {
                         field: 'operate',
@@ -153,8 +153,8 @@ var Controller = {
                 return '<a href="javascript:;" class="btn-change" data-id="' + row.id + '">' + m + '</a>';
             },
             status: function (value, row, index) {
-                var status = "正常";
-                return '<span class="text-success" title="实例状态: ' + status + '"><i class="fa fa-circle"></i></span> ';
+                var status = L('Normal');
+                return '<span class="text-success" title="' + L('Status') + ': ' + status + '"><i class="fa fa-circle"></i></span> ';
             }
         },
         detail: function (url) {
@@ -193,7 +193,7 @@ var Controller = {
             });
         },
         change_certificate: function (pid) {
-            $("select[name=certificate]").append('<option value="">选择凭证</option>');
+            $("select[name=certificate]").append('<option value="">' + L('Choose') + L('Certificate') + '</option>');
             Fast.api.ajax({ "url": "/auth/certificate/lists/", "dataType": "json", "async": false }, function (data) {
                 if (data.code) {
                     for (var i = 0; i < data.rows.length; i++) {

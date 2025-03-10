@@ -6,37 +6,54 @@
                 <tbody>
                     <% config.forEach(function(r){ %>
                         <tr>
-                            <td>
-                                <%= r.cname %>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-sm-8 col-xs-12">
-                                        <% if (r.ename=="enabled" || r.ename=="template" ) {%>
-                                            <select name="<%= r.ename %>" class="form-control">
-                                                <option value="0">关闭</option>
-                                                <% if (r.value=="1" ) {%>
-                                                    <option value="1" selected="selected">开启</option>
-                                                    <% }else{ %>
-                                                        <option value="1">开启</option>
-                                                        <% }; %>
-                                            </select>
-                                            <% }else{ %>
-                                                <input type="text" name="<%= r.ename %>" value="<%= r.value %>"
-                                                    class="form-control" data-tip="请填写<%= r.cname %>">
-                                                <% }; %>
-                                    </div>
-                                    <div class="col-sm-4"></div>
-                                </div>
-                            </td>
+                            <% if (lang_en) {%>
+                                <td>
+                                    <%= r.ename.charAt(0).toUpperCase() + r.ename.slice(1) %>
+                                </td>
+                                <% } else {%>
+                                    <td>
+                                        <%= r.cname %>
+                                    </td>
+                                    <% } %>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12">
+                                                    <% if (r.ename=="enabled" || r.ename=="template" ) {%>
+                                                        <select name="<%= r.ename %>" class="form-control">
+                                                            <option value="0">
+                                                                <%= L('Close') %>
+                                                            </option>
+                                                            <% if (r.value=="1" ) {%>
+                                                                <option value="1" selected="selected">
+                                                                    <%= L('Open') %>
+                                                                </option>
+                                                                <% }else{ %>
+                                                                    <option value="1">
+                                                                        <%= L('Open') %>
+                                                                    </option>
+                                                                    <% }; %>
+                                                        </select>
+                                                        <% }else{ %>
+                                                            <input type="text" name="<%= r.ename %>"
+                                                                value="<%= r.value %>" class="form-control"
+                                                                data-tip="<%= r.cname %>">
+                                                            <% }; %>
+                                                </div>
+                                                <div class="col-sm-4"></div>
+                                            </div>
+                                        </td>
                         </tr>
                         <% }); %>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td style="padding: 0;padding-top: 20px;">
-                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
-                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                            <button type="submit" class="btn btn-success btn-embossed">
+                                <%= L('Confirm')%>
+                            </button>
+                            <button type="reset" class="btn btn-default btn-embossed">
+                                <%= L('Reset')%>
+                            </button>
                         </td>
                         <td><input type="text" name="id" value="<%= name %>" class="form-control hide"></td>
                     </tr>

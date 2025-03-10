@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from .lang.zh_ch import Lang
+from .lang.zh_ch import Lang, get_language
 from .common import load_index_config, load_navigation_memu
 
 from django.utils.decorators import method_decorator
@@ -29,10 +29,22 @@ class Index(View):
     def get(self, request, *args, **kwargs):
         query_config = load_index_config()
         if query_config["code"]:
-            query_menu = load_navigation_memu(request)
+            english = True if query_config["msg"].get("language") == "english" else False
+            query_menu = load_navigation_memu(request, english)
             response_data = {
                 "menu": query_menu,
+                "language": query_config["msg"].get("language"),
                 "config": query_config["msg"],
+                "lang": {
+                    "menu": Lang.get("MENU"),
+                    "visualization": Lang.get("Monitor Dashboard"),
+                    "view": Lang.get("View All"),
+                    "logout": Lang.get("Log out"),
+                    "changepassword": Lang.get("Change Password"),
+                    "message": Lang.get("You have {0} messages").format(IndexView.event().get("count")),
+                    "login": Lang.get("Welcome {0}").format(request.user.username),
+                    "extension": Lang.get("EXTRA"),
+                },
                 "event": IndexView.event(),
                 "year": api.datetime.datetime.now().year,
             }
@@ -57,6 +69,14 @@ class Login(View):
             return render(request, self.template_name, {
                 "config": query_config["msg"],
                 "year": api.datetime.datetime.now().year,
+                "lang": {
+                    "forgot": Lang.get("forgot password"),
+                    "remember": Lang.get("remember password"),
+                    "email": Lang.get("email"),
+                    "username": Lang.get("username"),
+                    "password": Lang.get("password"),
+                    "login": Lang.get("sign in"),
+                }
             })
         return HttpResponse(query_config, content_type="application/json")
 
@@ -72,7 +92,7 @@ class ForgotCode(View):
             if request_email is not None:
                 info = UserResetOption.send_code(request_email)
             else:
-                info["msg"] = "参数错误, 请稍后在试下！"
+                info["msg"] = Lang.get("unknown exception error")
         except Exception as e:
             info["msg"] = str(e)
         return HttpResponse(api.Api.json_dump(info), content_type="application/json")
@@ -87,6 +107,13 @@ class ForgotPassword(View):
             return render(request, self.template_name, {
                 "config": query_config["msg"],
                 "year": api.datetime.datetime.now().year,
+                "lang": {
+                    "name": Lang.get("forgot password"),
+                    "email": Lang.get("email"),
+                    "code": Lang.get("code"),
+                    "get": Lang.get("get"),
+                    "login": Lang.get("login"),
+                }
             })
         return HttpResponse(query_config, content_type="application/json")
 
@@ -106,7 +133,7 @@ class ForgotPassword(View):
                 info["msg"] = "参数错误, 请稍后在试下！"
         except Exception as e:
             api.logger.error("{0}".format(str(e)))
-            info["msg"] = "未知错误！"
+            info["msg"] = Lang.get("unknown exception error")
         return HttpResponse(api.Api.json_dump(info), content_type="application/json")
 
 
@@ -163,6 +190,7 @@ class AuthRuleAdd(LoginValidate, PermissionViewMixin, BaseView):
                     rule = Rule()
                     rule.name = data["name"]
                     rule.title = data["title"]
+                    rule.entile = data["entitle"]
                     rule.icon = data["icon"]
                     rule.comment = data["remark"]
                     rule.ismenu = True if data["ismenu"] == "1" else False
@@ -181,6 +209,7 @@ class AuthRuleAdd(LoginValidate, PermissionViewMixin, BaseView):
                 Rule.objects.filter(id=(data["id"])).update(
                     name=data["name"],
                     title=data["title"],
+                    entitle=data["entitle"],
                     icon=data["icon"],
                     comment=data["remark"],
                     ismenu=True if data["ismenu"] == "1" else False,
@@ -240,7 +269,7 @@ class AuthRuleChange(LoginValidate, PermissionViewMixin, BaseView):
                     )
                     info["code"] = True
             else:
-                info["msg"] = "参数出错！"
+                info["msg"] = Lang.get("unknown exception error")
         except Exception as e:
             api.logger.error(str(e))
             info["msg"] = Lang.get("unknown exception error")
@@ -322,7 +351,7 @@ class IndexCheckUpdate(BaseView):
         info = {"code": False, "msg": ""}
         try:
             info["code"] = True
-            info["msg"] = "已是最新版本!"
+            info["msg"] = Lang.get("Already latest")
         except Exception as e:
             api.logger.error(str(e))
             info["msg"] = Lang.get("unknown exception error")
@@ -440,12 +469,12 @@ class UserPermission(BaseView):
         return info
 
 
-class LangZh(View):
+class Language(View):
     def get(self, request):
         controller = request.GET.get("controller", None)
         if controller == "index":
             pass
-        response = HttpResponse(api.Api.json_dump(Lang, ensure_ascii=False))
+        response = HttpResponse(api.Api.json_dump(get_language(), ensure_ascii=False))
         response["Content-Type"] = "application/json"
         response["Cache-Control"] = "public"
         response["Pragma"] = "cache"

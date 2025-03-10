@@ -14,6 +14,7 @@ from webserver.settings import RDS
 from .sender import SenderMail
 from .permissions import UserAuthorize
 from operator import itemgetter
+from webserver.website.lang.zh_ch import Lang
 
 
 class IndexView(object):
@@ -56,7 +57,7 @@ class IndexView(object):
             business_data.append(len(busines))
 
         host = {
-            "label": "主机",
+            "label": Lang.get("hosts"),
             "backgroundColor": "#cde7f1",
             "borderColor": "#75c7e6",
             "pointBackgroundColor": "#75c7e6",
@@ -64,7 +65,7 @@ class IndexView(object):
             "data": hosts_data
         }
         business = {
-            "label": "业务",
+            "label": Lang.get("business"),
             "backgroundColor": "rgba(220,220,220,0.5)",
             "borderColor": "rgba(220,220,220,1)",
             "pointBackgroundColor": "rgba(220,220,220,1)",
@@ -156,7 +157,7 @@ class SystemConfig(object):
                 info["msg"] = "数据库查找错误，请稍后再试！"
         except Exception as e:
             api.logger.error(str(e))
-            info["msg"] = "未知错误！"
+            info["msg"] = Lang.get("unknown exception error")
         return info
 
 
@@ -180,7 +181,7 @@ class UserResetOption(object):
                 info["msg"] = "{0} 不存在或不是唯一！".format(email)
         except Exception as e:
             api.logger.error(str(e))
-            info["msg"] = "未知错误, 请稍后再试！"
+            info["msg"] = Lang.get("unknown exception error")
         return info
 
     @classmethod
@@ -208,7 +209,7 @@ class UserResetOption(object):
                 info["msg"] = "{0} 不存在或不是唯一！".format(email)
         except Exception as e:
             api.logger.error(str(e))
-            info["msg"] = "未知错误, 请稍后再试！"
+            info["msg"] = Lang.get("unknown exception error")
         return info
 
 
@@ -249,7 +250,7 @@ class ResourceOption(object):
             info["code"] = True
         except Exception as e:
             api.logger.error(str(e))
-            info["msg"] = "未知错误, 请稍后再试！"
+            info["msg"] = Lang.get("unknown exception error")
         return info
 
 

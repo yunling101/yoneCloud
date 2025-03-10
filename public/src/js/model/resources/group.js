@@ -52,9 +52,9 @@ var Controller = {
                 [
                     { field: 'state', checkbox: true, },
                     { field: 'id', title: 'ID' },
-                    { field: 'name', title: "分组" + L('Name') },
-                    { field: 'hosts', title: L('Hosts') + "数", formatter: Controller.api.formatter.hosts },
-                    { field: 'comment', title: L('Comment') + "信息" },
+                    { field: 'name', title: L('Name') },
+                    { field: 'hosts', title: L('Hosts'), formatter: Controller.api.formatter.hosts },
+                    { field: 'comment', title: L('Comment') },
                     {
                         field: 'operate',
                         title: L('Operate'),
@@ -74,9 +74,9 @@ var Controller = {
         formatter: {
             hosts: function (value, row, index) {
                 if (value != null && value.length != 0) {
-                    return value.length + "个";
+                    return value.length;
                 } else {
-                    return 0 + "个";;
+                    return 0;
                 }
             }
         },
@@ -95,11 +95,11 @@ var Controller = {
                             $("#select_hosts").append(o);
                         }
                         $("#select_hosts").bootstrapDualListbox({
-                            nonSelectedListLabel: '可选择主机',
-                            selectedListLabel: '已选择主机',
-                            infoText: '共{0}个可选',
-                            infoTextEmpty: '空列表',
-                            filterPlaceHolder: '过滤',
+                            nonSelectedListLabel: L('Host can be selected'),
+                            selectedListLabel: L('Host selected'),
+                            infoText: L('Total {0} available'),
+                            infoTextEmpty: L('Empty list'),
+                            filterPlaceHolder: L('Filter'),
                             selectorMinimalHeight: 160,
                         });
                         $(".content").toggleClass("sk-loading");

@@ -4,17 +4,22 @@ var Controller = {
          if (data.code) {
             for (var i in data.rows) {
                var rows = data.rows[i];
+               var name = rows.cname;
+               if (lang_en) {
+                  name = rows.ename.charAt(0).toUpperCase() + rows.ename.slice(1);
+               }
                if (rows.ename == "basic") {
-                  $("ul.nav.nav-tabs").append('<li><a class="nav-link active" href="#' + rows.ename + '" data-toggle="tab">' + rows.cname + '</a></li>');
+                  $("ul.nav.nav-tabs").append('<li><a class="nav-link active" href="#' + rows.ename + '" data-toggle="tab">' + name + '</a></li>');
                } else {
-                  $("ul.nav.nav-tabs").append('<li><a class="nav-link" href="#' + rows.ename + '" data-toggle="tab">' + rows.cname + '</a></li>');
+                  $("ul.nav.nav-tabs").append('<li><a class="nav-link" href="#' + rows.ename + '" data-toggle="tab">' + name + '</a></li>');
                }
                var textarea = ["whitelist", "describe", "forbiddenip", "authorize"];
                Fast.api.render("system/configLine", function (html) {
                   $("#myTabContent").append(ejs.render(html, {
                      name: rows.ename,
                      config: rows.config,
-                     textarea: textarea
+                     textarea: textarea,
+                     lang: lang_en,
                   }));
                });
             }

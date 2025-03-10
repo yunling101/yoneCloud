@@ -6,61 +6,84 @@
                 <tbody>
                     <% config.forEach(function(r){ %>
                         <tr>
-                            <td>
-                                <%= r.cname %>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-sm-8 col-xs-12">
-                                        <% if (textarea.indexOf(r.ename) !=-1) {%>
-                                            <textarea name="<%= r.ename %>" class="form-control" rows="8"
-                                                data-tip="一行一条记录"><%= r.value %></textarea>
-                                            <% }else if ( r.ename=="logo" ){ %>
-                                                <div class="basic-logo">
-                                                    <img src="<%= r.value %>" id="logoId">
-                                                    <p>注: 图片背景必须为透明, 且仅支持png图片</p>
-                                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                        <span class="btn btn-default btn-file">
-                                                            <input type="file" name="logoFile" />
-                                                        </span>
-                                                        <span class="text-info" id="logoDefault"
-                                                            style="margin-left: 15px;cursor: pointer;">恢复默认</span>
-                                                    </div>
+                            <% if (lang) {%>
+                                <td>
+                                    <%= r.ename.charAt(0).toUpperCase() + r.ename.slice(1) %>
+                                </td>
+                                <% }else{ %>
+                                    <td>
+                                        <%= r.cname %>
+                                    </td>
+                                    <% }; %>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12">
+                                                    <% if (textarea.indexOf(r.ename) !=-1) {%>
+                                                        <textarea name="<%= r.ename %>" class="form-control"
+                                                            rows="8"><%= r.value %></textarea>
+                                                        <% }else if ( r.ename=="logo" ){ %>
+                                                            <div class="basic-logo">
+                                                                <img src="<%= r.value %>" id="logoId">
+                                                                <!-- <p>注: 图片背景必须为透明, 且仅支持png图片</p> -->
+                                                                <div class="fileinput fileinput-new"
+                                                                    data-provides="fileinput">
+                                                                    <span class="btn btn-default btn-file">
+                                                                        <input type="file" name="logoFile" />
+                                                                    </span>
+                                                                    <span class="text-info" id="logoDefault"
+                                                                        style="margin-left: 15px;cursor: pointer;">
+                                                                        <%= L('Restore')%>
+                                                                            <%= L('Default')%>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <% }else if ( r.ename=="language" ){ %>
+                                                                <select name="<%=r.ename %>" class="form-control">
+                                                                    <% if (r.value=="chinese" ){ %>
+                                                                        <option value="chinese" selected>中文</option>
+                                                                        <option value="english">English</option>
+                                                                        <% }else{ %>
+                                                                            <option value="english" selected>English
+                                                                            </option>
+                                                                            <option value="chinese">中文</option>
+                                                                            <% }; %>
+                                                                </select>
+                                                                <% }else if ( r.ename=="recycle" || r.ename=="white" ){
+                                                                    %>
+                                                                    <select name="<%= r.ename %>" class="form-control">
+                                                                        <% if (r.value=="0" ){ %>
+                                                                            <option value="0" selected>
+                                                                                <%= L('Close')%>
+                                                                            </option>
+                                                                            <option value="1">
+                                                                                <%= L('Open')%>
+                                                                            </option>
+                                                                            <% }else{ %>
+                                                                                <option value="0">
+                                                                                    <%= L('Close')%>
+                                                                                </option>
+                                                                                <option value="1" selected>
+                                                                                    <%= L('Open')%>
+                                                                                </option>
+                                                                                <% }; %>
+                                                                    </select>
+                                                                    <% }else if ( r.ename=="version" ||
+                                                                        r.ename=="auth_type" ){ %>
+                                                                        <input type="text" name="<%= r.ename %>"
+                                                                            value="<%= r.value %>" class="form-control"
+                                                                            readonly>
+                                                                        <% }else{ %>
+                                                                            <input type="text" name="<%= r.ename %>"
+                                                                                value="<%= r.value %>"
+                                                                                class="form-control"
+                                                                                data-tip="请填写<%= r.cname %>">
+                                                                            <% }; %>
                                                 </div>
-                                                <% }else if ( r.ename=="language" ){ %>
-                                                    <select name="<%=r.ename %>" class="form-control">
-                                                        <% if (r.value=="chinese" ){ %>
-                                                            <option value="chinese" selected>中文</option>
-                                                            <option value="english">English</option>
-                                                            <% }else{ %>
-                                                                <option value="english" selected>English</option>
-                                                                <option value="chinese">中文</option>
-                                                                <% }; %>
-                                                    </select>
-                                                    <% }else if ( r.ename=="recycle" || r.ename=="white" ){ %>
-                                                        <select name="<%= r.ename %>" class="form-control">
-                                                            <% if (r.value=="0" ){ %>
-                                                                <option value="0" selected>关闭</option>
-                                                                <option value="1">开启</option>
-                                                                <% }else{ %>
-                                                                    <option value="0">关闭</option>
-                                                                    <option value="1" selected>开启</option>
-                                                                    <% }; %>
-                                                        </select>
-                                                        <% }else if ( r.ename=="version" || r.ename=="auth_type" ){ %>
-                                                            <input type="text" name="<%= r.ename %>"
-                                                                value="<%= r.value %>" class="form-control" readonly>
-                                                            <% }else{ %>
-                                                                <input type="text" name="<%= r.ename %>"
-                                                                    value="<%= r.value %>" class="form-control"
-                                                                    data-tip="请填写<%= r.cname %>">
-                                                                <% }; %>
-                                    </div>
-                                    <div class="col-sm-4">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>{{<%= r.ename %>}}</td>
+                                                <div class="col-sm-4">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{<%= r.ename %>}}</td>
                         </tr>
                         <% }); %>
                 </tbody>
@@ -70,8 +93,12 @@
                             <input type="text" name="id" value="<%= name %>" class="form-control hide">
                         </td>
                         <td>
-                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
-                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                            <button type="submit" class="btn btn-success btn-embossed">
+                                <%= L('Confirm')%>
+                            </button>
+                            <button type="reset" class="btn btn-default btn-embossed">
+                                <%= L('Reset')%>
+                            </button>
                         </td>
                         <td></td>
                     </tr>

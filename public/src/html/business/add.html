@@ -1,36 +1,50 @@
 <div class="content">
-    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="/business/add/">
+    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST"
+        action="/business/add/">
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">业务名:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Name')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="name" placeholder="业务名" data-rule="required;name"/>
+                <input type="text" class="form-control" name="name" placeholder="<%= L('Name')%>"
+                    data-rule="required;name" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">生命周期:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Life Cycle')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="life_cycle" placeholder="生命周期"/>
+                <input type="text" class="form-control" name="life_cycle" placeholder="<%= L('Life Cycle')%>" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">维护人员:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Maintainer')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="maintainer" placeholder="维护人员"/>
+                <input type="text" class="form-control" name="maintainer" placeholder="<%= L('Maintainer')%>" />
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2">测试人员:</label>
+            <label class="control-label col-xs-12 col-sm-2">
+                <%= L('Testers')%>:
+            </label>
             <div class="col-xs-12 col-sm-8">
-                <input type="text" class="form-control" name="tester" placeholder="测试人员" />
+                <input type="text" class="form-control" name="tester" placeholder="<%= L('Testers')%>" />
             </div>
         </div>
 
-        <input type="text" class="form-control hide" name="id"/>
+        <input type="text" class="form-control hide" name="id" />
         <div class="form-group layer-footer">
             <div class="col-xs-2"></div>
             <div class="col-xs-12 col-sm-8">
-                <button type="submit" class="btn btn-success btn-embossed">确认</button>
-                <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                <button type="submit" class="btn btn-success btn-embossed">
+                    <%= L('Confirm')%>
+                </button>
+                <button type="reset" class="btn btn-default btn-embossed">
+                    <%= L('Reset')%>
+                </button>
             </div>
         </div>
     </form>

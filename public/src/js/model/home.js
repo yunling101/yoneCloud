@@ -2,15 +2,15 @@ var Controller = {
    index: function () {
       Controller.weekDate();
       week = {
-         "0": "星期日",
-         "1": "星期一",
-         "2": "星期二",
-         "3": "星期三",
-         "4": "星期四",
-         "5": "星期五",
-         "6": "星期六"
+         "0": "Sunday",
+         "1": "Monday",
+         "2": "Tuesday",
+         "3": "Wednesday",
+         "4": "Thursday",
+         "5": "Friday",
+         "6": "Saturday"
       }
-      $("#wlc-info").html(moment(new Date()).format('YYYY年MM月DD日') + week[moment().format('d')] + "，欢迎您回到控制台。")
+      $("#wlc-info").html(moment(new Date()).format(L('YYYY-MM-DD')) + " " + L(week[moment().format('d')]) + "，" + L('Welcome back to the console') + "。")
 
       Fast.api.ajax({ "url": "/index/stat/", "dataType": "json" }, function (data) {
          if (data.code) {
@@ -18,10 +18,10 @@ var Controller = {
             $("#indexHosts").text(data.msg.hosts);
             $("#indexBusiness").text(data.msg.business);
             $("#indexCluster").text(data.msg.cluster);
-            $("#auth_type").html('<span class="label label-info">' + data.msg.auth_type + '</span>');
+            $("#auth_type").html('<span class="label label-info">' + L(data.msg.auth_type) + '</span>');
             $("#auth_version").html(data.msg.auth_version);
-            $("#monthDate").text("最近更新时间 " + data.msg.time);
-            $("#weekDate").text(" 最近更新时间 " + data.msg.time);
+            $("#monthDate").text(L('Last updated') + " " + data.msg.time);
+            $("#weekDate").text(" " + L('Last updated') + " " + data.msg.time);
          } else {
             Toastr.error(data.msg);
             return false;
@@ -52,13 +52,13 @@ var Controller = {
                div += '<div class="row">';
                div += '<div class="col-lg-3 date">';
                div += '<i class="fa fa-briefcase"></i>';
-               div += moment(new Date(v.date_added)).format('YYYY年MM月DD日');
+               div += moment(new Date(v.date_added)).format(L('YYYY-MM-DD'));
                div += '<br/>';
                div += '<small class="text-navy">' + moment(new Date(v.date_added)).format('hh:mm:ss') + '</small>';
                div += '</div>';
                div += '<div class="col-lg-7 content no-top-border">';
                div += '<p class="m-b-xs"><strong>' + v.username + '</strong></p>';
-               div += '<p>' + v.object + '; <br/>【操作IP】' + v.ip + '</p>';
+               div += '<p>' + v.object + '; <br/>【' + L('Operate') + ' IP】' + v.ip + '</p>';
                div += '</div>';
                div += '</div>';
                div += '</div>';
