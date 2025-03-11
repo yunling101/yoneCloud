@@ -13,10 +13,10 @@ deploy/ctrmanager/*
 deploy/yonecloud/*
 node_modules/
 migrations/
+public/src/js/template.js
 public/static/
 kubernetes/manifests/base/
 kubernetes/backup/
-
 __pycache__
 
 *.pyc
@@ -26,5 +26,4 @@ __pycache__
 *.tar.gz
 .env.1
 .DS_Store
-
 README_API.md
