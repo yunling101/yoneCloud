@@ -205,7 +205,11 @@ var Fast = {
                 var app = path.join("");
             }
         }
-        Fast.headCrumb(app, $("#" + app).children("a").text());
+        if (app == "eventLists") {
+            Fast.headCrumb(app, $("#" + app).children("a").find("span:first").text());
+        } else {
+            Fast.headCrumb(app, $("#" + app).children("a").text());
+        }
         $(".navbar-default .nav li").removeClass("active");
         if ($(".navbar-default .nav #" + app).parent().hasClass("nav-third-level")) {
             $(".navbar-default .nav #" + app).addClass("active").parent().addClass("in").parent().addClass("active").parent().addClass("in").parent().addClass("active");
